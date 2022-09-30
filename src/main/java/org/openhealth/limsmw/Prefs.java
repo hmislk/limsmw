@@ -47,6 +47,82 @@ public class Prefs {
     private static boolean succes = false;
     private static String message = "";
 
+    static String analyzer1Name = "analyzer1Name";
+    static String analyzer1Type = "analyzer1Type";
+    static String analyzer1Port = "analyzer1Port";
+
+    static String analyzer2Name = "analyzer2Name";
+    static String analyzer2Type = "analyzer2Type";
+    static String analyzer2Port = "analyzer2Port";
+
+    static String analyzer3Name = "analyzer3Name";
+    static String analyzer3Type = "analyzer3Type";
+    static String analyzer3Port = "analyzer3Port";
+
+    static String analyzer4Name = "analyzer4Name";
+    static String analyzer4Type = "analyzer4Type";
+    static String analyzer4Port = "analyzer4Port";
+
+    static String analyzer5Name = "analyzer5Name";
+    static String analyzer5Type = "analyzer5Type";
+    static String analyzer5Port = "analyzer5Port";
+
+    static String analyzer6Name = "analyzer6Name";
+    static String analyzer6Type = "analyzer6Type";
+    static String analyzer6Port = "analyzer6Port";
+
+    static String analyzer1NameValue;
+    static String analyzer1TypeValue;
+    static String analyzer1PortValue;
+
+    static String analyzer2NameValue;
+    static String analyzer2TypeValue;
+    static String analyzer2PortValue;
+
+    static String analyzer3NameValue;
+    static String analyzer3TypeValue;
+    static String analyzer3PortValue;
+
+    static String analyzer4NameValue;
+    static String analyzer4TypeValue;
+    static String analyzer4PortValue;
+
+    static String analyzer5NameValue;
+    static String analyzer5TypeValue;
+    static String analyzer5PortValue;
+
+    static String analyzer6NameValue;
+    static String analyzer6TypeValue;
+    static String analyzer6PortValue;
+
+    public static void loadAnalyzerPrefs() {
+        System.out.println("load Analyer prefs");
+        Preferences prefs = Preferences.userNodeForPackage(Prefs.class);
+        analyzer1NameValue = prefs.get(analyzer1Name, analyzer1NameValue);
+        analyzer1TypeValue = prefs.get(analyzer1Type, analyzer1TypeValue);
+        analyzer1PortValue = prefs.get(analyzer1Port, analyzer1PortValue);
+
+        analyzer2NameValue = prefs.get(analyzer2Name, analyzer2NameValue);
+        analyzer2TypeValue = prefs.get(analyzer2Type, analyzer2TypeValue);
+        analyzer2PortValue = prefs.get(analyzer2Port, analyzer2PortValue);
+
+        analyzer3NameValue = prefs.get(analyzer3Name, analyzer3NameValue);
+        analyzer3TypeValue = prefs.get(analyzer3Type, analyzer3TypeValue);
+        analyzer3PortValue = prefs.get(analyzer3Port, analyzer3PortValue);
+
+        analyzer4NameValue = prefs.get(analyzer4Name, analyzer4NameValue);
+        analyzer4TypeValue = prefs.get(analyzer4Type, analyzer4TypeValue);
+        analyzer4PortValue = prefs.get(analyzer4Port, analyzer4PortValue);
+
+        analyzer5NameValue = prefs.get(analyzer5Name, analyzer5NameValue);
+        analyzer5TypeValue = prefs.get(analyzer5Type, analyzer5TypeValue);
+        analyzer5PortValue = prefs.get(analyzer5Port, analyzer5PortValue);
+
+        analyzer6NameValue = prefs.get(analyzer6Name, analyzer6NameValue);
+        analyzer6TypeValue = prefs.get(analyzer6Type, analyzer6TypeValue);
+        analyzer6PortValue = prefs.get(analyzer6Port, analyzer6PortValue);
+    }
+
     public static void loadPrefs() {
         System.out.println("load prefs");
         Preferences prefs = Preferences.userNodeForPackage(Prefs.class);
@@ -59,6 +135,35 @@ public class Prefs {
         System.out.println("save prefs");
         Preferences prefs = Preferences.userNodeForPackage(Prefs.class);
         prefs.put(URL, getUrlValue());
+    }
+
+    public static void saveAnalyzerPrefs() {
+        System.out.println("save Analyzer prefs");
+        Preferences prefs = Preferences.userNodeForPackage(Prefs.class);
+
+        prefs.put(analyzer1Name, analyzer1NameValue);
+        prefs.put(analyzer1Type, analyzer1TypeValue);
+        prefs.put(analyzer1Port, analyzer1PortValue);
+
+        prefs.put(analyzer2Name, analyzer2NameValue);
+        prefs.put(analyzer2Type, analyzer2TypeValue);
+        prefs.put(analyzer2Port, analyzer2PortValue);
+
+        prefs.put(analyzer3Name, analyzer3NameValue);
+        prefs.put(analyzer3Type, analyzer3TypeValue);
+        prefs.put(analyzer3Port, analyzer3PortValue);
+
+        prefs.put(analyzer4Name, analyzer4NameValue);
+        prefs.put(analyzer4Type, analyzer4TypeValue);
+        prefs.put(analyzer4Port, analyzer4PortValue);
+
+        prefs.put(analyzer5Name, analyzer5NameValue);
+        prefs.put(analyzer5Type, analyzer5TypeValue);
+        prefs.put(analyzer5Port, analyzer5PortValue);
+
+        prefs.put(analyzer6Name, analyzer6NameValue);
+        prefs.put(analyzer6Type, analyzer6TypeValue);
+        prefs.put(analyzer6Port, analyzer6PortValue);
     }
 
     public static void getDataFromResponse(String response) {
@@ -384,6 +489,4 @@ public class Prefs {
         printSample = aPrintSample;
     }
 
-    
-    
 }

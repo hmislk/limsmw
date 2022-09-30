@@ -46,7 +46,6 @@ public class Login extends javax.swing.JFrame {
         btnLog = new javax.swing.JButton();
         txtUrl = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        btnPrinterSettings = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,13 +81,6 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setText("URL");
 
-        btnPrinterSettings.setText("Printer Settings");
-        btnPrinterSettings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPrinterSettingsActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Example of a URL is http://35.185.185.235:8080/arogya/");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -102,9 +94,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
-                        .addComponent(btnPrinterSettings)
-                        .addContainerGap())
+                        .addContainerGap(201, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtUrl, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -139,14 +129,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(btnPrinterSettings))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -187,7 +172,7 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "System is down or internet is not available or Wrong Username & Password.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Logged Successfully", "Login Successful", JOptionPane.INFORMATION_MESSAGE);
-            Sampling sampling = new Sampling();
+            Interfacing sampling = new Interfacing();
             sampling.setVisible(true);
             sampling.setLocationRelativeTo(null);
             this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -211,14 +196,6 @@ public class Login extends javax.swing.JFrame {
             btnLogActionPerformed(evt);
         }
     }//GEN-LAST:event_txtPasswordActionPerformed
-
-    private void btnPrinterSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrinterSettingsActionPerformed
-        PrinterSettings ps = new PrinterSettings();
-        ps.setVisible(true);
-        ps.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        ps.setLocationRelativeTo(null);
-//        this.setVisible(false);
-    }//GEN-LAST:event_btnPrinterSettingsActionPerformed
 
     public String sendRestfulRequest(String url) {
         String output = "";
@@ -304,7 +281,6 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLog;
-    private javax.swing.JButton btnPrinterSettings;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
