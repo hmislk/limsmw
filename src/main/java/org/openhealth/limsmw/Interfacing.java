@@ -63,56 +63,56 @@ public class Interfacing extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txtAnalyzer1Name = new javax.swing.JTextField();
+        txtA1n = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cmbAnalyzer1Type = new javax.swing.JComboBox<>();
+        cmbA1t = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        txtAnalyzer1Port = new javax.swing.JTextField();
+        txtA1p = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtA2n = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cmbA2t = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtA2p = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtA3n = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cmbA3t = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        txtA3p = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtA4n = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        cmbA4t = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtA4p = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtA5n = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        cmbA5t = new javax.swing.JComboBox<>();
         jLabel20 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtA5p = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
+        txtA6n = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
+        cmbA6t = new javax.swing.JComboBox<>();
         jLabel24 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        txtA6p = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -146,7 +146,7 @@ public class Interfacing extends javax.swing.JFrame {
 
         jLabel3.setText("Analyzer Type");
 
-        cmbAnalyzer1Type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
+        cmbA1t.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
 
         jLabel4.setText("Port");
 
@@ -168,9 +168,9 @@ public class Interfacing extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtAnalyzer1Port)
-                            .addComponent(txtAnalyzer1Name)
-                            .addComponent(cmbAnalyzer1Type, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtA1p)
+                            .addComponent(txtA1n)
+                            .addComponent(cmbA1t, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -187,15 +187,15 @@ public class Interfacing extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtAnalyzer1Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA1n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cmbAnalyzer1Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbA1t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtAnalyzer1Port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA1p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -206,7 +206,7 @@ public class Interfacing extends javax.swing.JFrame {
 
         jLabel7.setText("Analyzer Type");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
+        cmbA2t.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
 
         jLabel8.setText("Port");
 
@@ -229,9 +229,9 @@ public class Interfacing extends javax.swing.JFrame {
                             .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField3)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtA2p)
+                            .addComponent(txtA2n)
+                            .addComponent(cmbA2t, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -248,15 +248,15 @@ public class Interfacing extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA2n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbA2t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA2p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -267,7 +267,7 @@ public class Interfacing extends javax.swing.JFrame {
 
         jLabel11.setText("Analyzer Type");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
+        cmbA3t.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
 
         jLabel12.setText("Port");
 
@@ -290,9 +290,9 @@ public class Interfacing extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField5)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtA3p)
+                            .addComponent(txtA3n)
+                            .addComponent(cmbA3t, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -309,15 +309,15 @@ public class Interfacing extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA3n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbA3t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA3p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -328,7 +328,7 @@ public class Interfacing extends javax.swing.JFrame {
 
         jLabel15.setText("Analyzer Type");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
+        cmbA4t.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
 
         jLabel16.setText("Port");
 
@@ -351,9 +351,9 @@ public class Interfacing extends javax.swing.JFrame {
                             .addComponent(jLabel16))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField8)
-                            .addComponent(jTextField7)
-                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtA4p)
+                            .addComponent(txtA4n)
+                            .addComponent(cmbA4t, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -370,15 +370,15 @@ public class Interfacing extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA4n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbA4t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA4p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -389,7 +389,7 @@ public class Interfacing extends javax.swing.JFrame {
 
         jLabel19.setText("Analyzer Type");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
+        cmbA5t.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
 
         jLabel20.setText("Port");
 
@@ -412,9 +412,9 @@ public class Interfacing extends javax.swing.JFrame {
                             .addComponent(jLabel20))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.Alignment.LEADING, 0, 154, Short.MAX_VALUE)
-                            .addComponent(jTextField9)
-                            .addComponent(jTextField10)))
+                            .addComponent(cmbA5t, javax.swing.GroupLayout.Alignment.LEADING, 0, 154, Short.MAX_VALUE)
+                            .addComponent(txtA5n)
+                            .addComponent(txtA5p)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -431,15 +431,15 @@ public class Interfacing extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA5n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbA5t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA5p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -450,7 +450,7 @@ public class Interfacing extends javax.swing.JFrame {
 
         jLabel23.setText("Analyzer Type");
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
+        cmbA6t.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BioRad D-10", "Dimension", "Indiko Plus", "MAGLUMI 2000", "Mindray, BC-5150", "SmartLyte", "SYSMEX XE-5000" }));
 
         jLabel24.setText("Port");
 
@@ -473,9 +473,9 @@ public class Interfacing extends javax.swing.JFrame {
                             .addComponent(jLabel24))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField12)
-                            .addComponent(jTextField11)
-                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtA6p)
+                            .addComponent(txtA6n)
+                            .addComponent(cmbA6t, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel25)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -492,15 +492,15 @@ public class Interfacing extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA6n, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbA6t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtA6p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -615,9 +615,29 @@ public class Interfacing extends javax.swing.JFrame {
     private void getSettings() {
         Prefs.loadAnalyzerPrefs();
         
-        txtAnalyzer1Name.setText(Prefs.analyzer1NameValue);
-        cmbAnalyzer1Type.setSelectedItem(Prefs.analyzer1TypeValue);
-        txtAnalyzer1Port.setText(Prefs.analyzer1PortValue);
+        txtA1n.setText(Prefs.analyzer1NameValue);
+        cmbA1t.setSelectedItem(Prefs.analyzer1TypeValue);
+        txtA1p.setText(Prefs.analyzer1PortValue);
+        
+         txtA2n.setText(Prefs.analyzer2NameValue);
+        cmbA2t.setSelectedItem(Prefs.analyzer2TypeValue);
+        txtA2p.setText(Prefs.analyzer2PortValue);
+        
+         txtA3n.setText(Prefs.analyzer3NameValue);
+        cmbA3t.setSelectedItem(Prefs.analyzer3TypeValue);
+        txtA3p.setText(Prefs.analyzer3PortValue);
+        
+         txtA4n.setText(Prefs.analyzer4NameValue);
+        cmbA4t.setSelectedItem(Prefs.analyzer4TypeValue);
+        txtA4p.setText(Prefs.analyzer4PortValue);
+        
+         txtA5n.setText(Prefs.analyzer5NameValue);
+        cmbA5t.setSelectedItem(Prefs.analyzer5TypeValue);
+        txtA5p.setText(Prefs.analyzer5PortValue);
+        
+         txtA6n.setText(Prefs.analyzer6NameValue);
+        cmbA6t.setSelectedItem(Prefs.analyzer6TypeValue);
+        txtA6p.setText(Prefs.analyzer6PortValue);
         
     }
 
@@ -658,9 +678,35 @@ public class Interfacing extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        Prefs.analyzer1NameValue = txtAnalyzer1Name.getText();
-        Prefs.analyzer1TypeValue =  String.valueOf(cmbAnalyzer1Type.getSelectedItem());
-        Prefs.analyzer1PortValue = txtAnalyzer1Port.getText();
+        Prefs.analyzer1NameValue = txtA1n.getText();
+        Prefs.analyzer1TypeValue =  String.valueOf(cmbA1t.getSelectedItem());
+        Prefs.analyzer1PortValue = txtA1p.getText();
+        
+         Prefs.analyzer2NameValue = txtA2n.getText();
+        Prefs.analyzer2TypeValue =  String.valueOf(cmbA2t.getSelectedItem());
+        Prefs.analyzer2PortValue = txtA2p.getText();
+        
+         Prefs.analyzer3NameValue = txtA3n.getText();
+        Prefs.analyzer3TypeValue =  String.valueOf(cmbA3t.getSelectedItem());
+        Prefs.analyzer3PortValue = txtA3p.getText();
+        
+         Prefs.analyzer4NameValue = txtA4n.getText();
+        Prefs.analyzer4TypeValue =  String.valueOf(cmbA4t.getSelectedItem());
+        Prefs.analyzer4PortValue = txtA4p.getText();
+        
+         Prefs.analyzer5NameValue = txtA5n.getText();
+        Prefs.analyzer5TypeValue =  String.valueOf(cmbA5t.getSelectedItem());
+        Prefs.analyzer5PortValue = txtA5p.getText();
+        
+         Prefs.analyzer6NameValue = txtA6n.getText();
+        Prefs.analyzer6TypeValue =  String.valueOf(cmbA6t.getSelectedItem());
+        Prefs.analyzer6PortValue = txtA6p.getText();
+        
+        
+        
+        
+        
+        
         Prefs.saveAnalyzerPrefs();
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -705,18 +751,18 @@ public class Interfacing extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> cmbAnalyzer1Type;
+    private javax.swing.JComboBox<String> cmbA1t;
+    private javax.swing.JComboBox<String> cmbA2t;
+    private javax.swing.JComboBox<String> cmbA3t;
+    private javax.swing.JComboBox<String> cmbA4t;
+    private javax.swing.JComboBox<String> cmbA5t;
+    private javax.swing.JComboBox<String> cmbA6t;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -749,19 +795,19 @@ public class Interfacing extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lblBillNo;
-    private javax.swing.JTextField txtAnalyzer1Name;
-    private javax.swing.JTextField txtAnalyzer1Port;
+    private javax.swing.JTextField txtA1n;
+    private javax.swing.JTextField txtA1p;
+    private javax.swing.JTextField txtA2n;
+    private javax.swing.JTextField txtA2p;
+    private javax.swing.JTextField txtA3n;
+    private javax.swing.JTextField txtA3p;
+    private javax.swing.JTextField txtA4n;
+    private javax.swing.JTextField txtA4p;
+    private javax.swing.JTextField txtA5n;
+    private javax.swing.JTextField txtA5p;
+    private javax.swing.JTextField txtA6n;
+    private javax.swing.JTextField txtA6p;
     private javax.swing.JTextArea txtLog;
     // End of variables declaration//GEN-END:variables
 }
