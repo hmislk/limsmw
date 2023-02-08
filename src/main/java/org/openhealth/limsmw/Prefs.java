@@ -46,6 +46,8 @@ public class Prefs {
 
     private static boolean succes = false;
     private static String message = "";
+    
+    private static  AnalyzerMachine[] analyzerMachines;
 
     static String analyzer1Name = "analyzer1Name";
     static String analyzer1Type = "analyzer1Type";
@@ -121,6 +123,8 @@ public class Prefs {
         analyzer6NameValue = prefs.get(analyzer6Name, analyzer6NameValue);
         analyzer6TypeValue = prefs.get(analyzer6Type, analyzer6TypeValue);
         analyzer6PortValue = prefs.get(analyzer6Port, analyzer6PortValue);
+        
+        analyzerMachines = prefs.get("analyzerMachines", null);
     }
 
     public static void loadPrefs() {
