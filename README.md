@@ -1,4 +1,4 @@
-# LIMS Middleware
+# oHMIS LIMS Middleware
 
 This middleware serves as a connector between OpenHMIS LIMS and analyzers. It provides support for HL7 and ASTM protocols, and can establish connections through TCP/IP and serial port. It supports both server and client modes, allowing bidirectional communication between the systems. As the number of analyzers that the middleware supports is expected to increase, new additions to the list of supported devices are anticipated. The middleware currently supports Dimention biochemistry analyzer and Sysmax Five part haematology analyzer.
 
