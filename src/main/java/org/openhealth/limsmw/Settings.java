@@ -5,15 +5,13 @@
 package org.openhealth.limsmw;
 
 import java.awt.Component;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -162,6 +160,14 @@ public class Settings extends javax.swing.JFrame {
 
     private void listAnalyzers() {
         analyzers = PrefsController.getPreference().getAnalyzers();
+
+        // Sort the analyzers by name
+        Collections.sort(analyzers, new Comparator<Analyzer>() {
+            @Override
+            public int compare(Analyzer a1, Analyzer a2) {
+                return a1.getName().compareToIgnoreCase(a2.getName());
+            }
+        });
 
         DefaultListModel<Analyzer> model = new DefaultListModel<>();
         for (Analyzer analyzer : analyzers) {
