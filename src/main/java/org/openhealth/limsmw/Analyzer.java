@@ -1,10 +1,14 @@
 package org.openhealth.limsmw;
 
+import java.util.Date;
+
 /**
  *
  * @author Buddhika
  */
 public class Analyzer {
+
+    private Date createdAt;
     private String name;
     private String manufacturer;
     private String model;
@@ -13,7 +17,22 @@ public class Analyzer {
     private InterfaceProtocol interfaceProtocol;
     private CommunicationType communicationType;
     private int baudRate; // only applicable for serial communication
-    
+
+    public Analyzer() {
+    }
+
+    public Analyzer(Date createdAt, String name, String manufacturer, String model, String serialNumber, InterfaceType interfaceType, InterfaceProtocol interfaceProtocol, CommunicationType communicationType, int baudRate) {
+        this.createdAt = createdAt;
+        this.name = name;
+        this.manufacturer = manufacturer;
+        this.model = model;
+        this.serialNumber = serialNumber;
+        this.interfaceType = interfaceType;
+        this.interfaceProtocol = interfaceProtocol;
+        this.communicationType = communicationType;
+        this.baudRate = baudRate;
+    }
+
     public Analyzer(String name, String manufacturer, String model, String serialNumber, InterfaceType interfaceType, InterfaceProtocol interfaceProtocol, CommunicationType communicationType, int baudRate) {
         this.name = name;
         this.manufacturer = manufacturer;
@@ -26,7 +45,6 @@ public class Analyzer {
     }
 
     // Getters and setters for each field
-
     public String getName() {
         return name;
     }
@@ -90,21 +108,30 @@ public class Analyzer {
     public void setBaudRate(int baudRate) {
         this.baudRate = baudRate;
     }
-    
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public enum InterfaceType {
         SERIAL,
-        TCP_IP
+        TCP_IP,
+        NONE,
     }
-    
+
     public enum InterfaceProtocol {
         ASTM,
         HL7V2_5,
-        FHIR
+        FHIR, NONE,
     }
-    
+
     public enum CommunicationType {
         SERVER,
-        CLIENT
+        CLIENT,
+        NONE,
     }
 }
-

@@ -43,7 +43,7 @@ public class PrefsController {
         // Get the user preferences node for this application
         Preferences prefs = Preferences.userNodeForPackage(PrefsController.class);
         prefJsonValue = preferenceToJson(preference);
-        // Set the value of the preference
+        System.out.println("prefJsonValue = " + prefJsonValue);
         prefs.put(PREF_JSON_NAME, prefJsonValue);
     }
 

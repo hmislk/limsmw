@@ -296,12 +296,7 @@ public class Login extends javax.swing.JFrame {
                         System.out.println(line);
                     }
                 }
-                PrefsController.getPreference().setUserName(txtUsername.getText());
-                PrefsController.getPreference().setPassword(txtPassword.getText());
-                PrefsController.getPreference().setUrl(txtUrl.getText().trim());
-                PrefsController.savePrefs();
-                Interfacing interfacing = new Interfacing();
-                interfacing.setVisible(true);
+                executeSuccessfulLoginActions();
             } else {
                 // Check for OperationOutcome resource in response body
 
@@ -333,6 +328,16 @@ public class Login extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void executeSuccessfulLoginActions() {
+        PrefsController.getPreference().setUserName(txtUsername.getText());
+        PrefsController.getPreference().setPassword(txtPassword.getText());
+        PrefsController.getPreference().setUrl(txtUrl.getText().trim());
+        PrefsController.savePrefs();
+        Interfacing interfacing = new Interfacing();
+        interfacing.setVisible(true);
+        this.dispose();
+    }
 
     private static String loginRequestToJson(LoginRequest loginRequest) {
         // Initialize the Gson object
