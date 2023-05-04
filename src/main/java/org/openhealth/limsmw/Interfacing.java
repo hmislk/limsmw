@@ -5,25 +5,16 @@
  */
 package org.openhealth.limsmw;
 
-import java.awt.print.PrinterJob;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintException;
-import javax.print.PrintService;
-import javax.print.SimpleDoc;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
-import javax.print.attribute.standard.Copies;
-import javax.swing.JOptionPane;
+import ca.uhn.hl7v2.DefaultHapiContext;
+import ca.uhn.hl7v2.HL7Exception;
+import ca.uhn.hl7v2.HapiContext;
+import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.model.v231.datatype.PN;
+import ca.uhn.hl7v2.model.v231.message.ADT_A01;
+import ca.uhn.hl7v2.model.v231.segment.MSH;
+import ca.uhn.hl7v2.model.v231.message.ORU_R01;
+import ca.uhn.hl7v2.parser.EncodingNotSupportedException;
+import ca.uhn.hl7v2.parser.Parser;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -116,6 +107,11 @@ public class Interfacing extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtMsg = new javax.swing.JTextArea();
+        btnMsgTxt = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtOut = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -511,6 +507,21 @@ public class Interfacing extends javax.swing.JFrame {
             }
         });
 
+        txtMsg.setColumns(20);
+        txtMsg.setRows(5);
+        jScrollPane2.setViewportView(txtMsg);
+
+        btnMsgTxt.setText("Check");
+        btnMsgTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMsgTxtActionPerformed(evt);
+            }
+        });
+
+        txtOut.setColumns(20);
+        txtOut.setRows(5);
+        jScrollPane3.setViewportView(txtOut);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -531,21 +542,24 @@ public class Interfacing extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(63, 63, 63)
-                                        .addComponent(lblBillNo))
-                                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
-                                .addGap(433, 433, 433))
+                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnMsgTxt))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblBillNo)))
+                        .addContainerGap(433, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,8 +570,17 @@ public class Interfacing extends javax.swing.JFrame {
                         .addComponent(btnSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnClear)
-                        .addGap(84, 84, 84)
-                        .addComponent(lblBillNo))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(84, 84, 84)
+                                .addComponent(lblBillNo)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnMsgTxt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -614,31 +637,31 @@ public class Interfacing extends javax.swing.JFrame {
 
     private void getSettings() {
         Prefs.loadAnalyzerPrefs();
-        
+
         txtA1n.setText(Prefs.analyzer1NameValue);
         cmbA1t.setSelectedItem(Prefs.analyzer1TypeValue);
         txtA1p.setText(Prefs.analyzer1PortValue);
-        
-         txtA2n.setText(Prefs.analyzer2NameValue);
+
+        txtA2n.setText(Prefs.analyzer2NameValue);
         cmbA2t.setSelectedItem(Prefs.analyzer2TypeValue);
         txtA2p.setText(Prefs.analyzer2PortValue);
-        
-         txtA3n.setText(Prefs.analyzer3NameValue);
+
+        txtA3n.setText(Prefs.analyzer3NameValue);
         cmbA3t.setSelectedItem(Prefs.analyzer3TypeValue);
         txtA3p.setText(Prefs.analyzer3PortValue);
-        
-         txtA4n.setText(Prefs.analyzer4NameValue);
+
+        txtA4n.setText(Prefs.analyzer4NameValue);
         cmbA4t.setSelectedItem(Prefs.analyzer4TypeValue);
         txtA4p.setText(Prefs.analyzer4PortValue);
-        
-         txtA5n.setText(Prefs.analyzer5NameValue);
+
+        txtA5n.setText(Prefs.analyzer5NameValue);
         cmbA5t.setSelectedItem(Prefs.analyzer5TypeValue);
         txtA5p.setText(Prefs.analyzer5PortValue);
-        
-         txtA6n.setText(Prefs.analyzer6NameValue);
+
+        txtA6n.setText(Prefs.analyzer6NameValue);
         cmbA6t.setSelectedItem(Prefs.analyzer6TypeValue);
         txtA6p.setText(Prefs.analyzer6PortValue);
-        
+
     }
 
     public String parseJsonAndGeneratePrintCommand(String json, String template) {
@@ -679,36 +702,60 @@ public class Interfacing extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         Prefs.analyzer1NameValue = txtA1n.getText();
-        Prefs.analyzer1TypeValue =  String.valueOf(cmbA1t.getSelectedItem());
+        Prefs.analyzer1TypeValue = String.valueOf(cmbA1t.getSelectedItem());
         Prefs.analyzer1PortValue = txtA1p.getText();
-        
-         Prefs.analyzer2NameValue = txtA2n.getText();
-        Prefs.analyzer2TypeValue =  String.valueOf(cmbA2t.getSelectedItem());
+
+        Prefs.analyzer2NameValue = txtA2n.getText();
+        Prefs.analyzer2TypeValue = String.valueOf(cmbA2t.getSelectedItem());
         Prefs.analyzer2PortValue = txtA2p.getText();
-        
-         Prefs.analyzer3NameValue = txtA3n.getText();
-        Prefs.analyzer3TypeValue =  String.valueOf(cmbA3t.getSelectedItem());
+
+        Prefs.analyzer3NameValue = txtA3n.getText();
+        Prefs.analyzer3TypeValue = String.valueOf(cmbA3t.getSelectedItem());
         Prefs.analyzer3PortValue = txtA3p.getText();
-        
-         Prefs.analyzer4NameValue = txtA4n.getText();
-        Prefs.analyzer4TypeValue =  String.valueOf(cmbA4t.getSelectedItem());
+
+        Prefs.analyzer4NameValue = txtA4n.getText();
+        Prefs.analyzer4TypeValue = String.valueOf(cmbA4t.getSelectedItem());
         Prefs.analyzer4PortValue = txtA4p.getText();
-        
-         Prefs.analyzer5NameValue = txtA5n.getText();
-        Prefs.analyzer5TypeValue =  String.valueOf(cmbA5t.getSelectedItem());
+
+        Prefs.analyzer5NameValue = txtA5n.getText();
+        Prefs.analyzer5TypeValue = String.valueOf(cmbA5t.getSelectedItem());
         Prefs.analyzer5PortValue = txtA5p.getText();
-        
-         Prefs.analyzer6NameValue = txtA6n.getText();
-        Prefs.analyzer6TypeValue =  String.valueOf(cmbA6t.getSelectedItem());
+
+        Prefs.analyzer6NameValue = txtA6n.getText();
+        Prefs.analyzer6TypeValue = String.valueOf(cmbA6t.getSelectedItem());
         Prefs.analyzer6PortValue = txtA6p.getText();
-        
-        
-        
-        
-        
-        
+
         Prefs.saveAnalyzerPrefs();
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    public void hapiExample1() {
+
+    }
+
+
+    private void btnMsgTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMsgTxtActionPerformed
+
+        HapiContext context = new DefaultHapiContext();
+        Parser p = context.getGenericParser();
+
+        Message hapiMsg;
+        try {
+            // The parse method performs the actual parsing
+            hapiMsg = p.parse(txtMsg.getText());
+            
+        } catch (EncodingNotSupportedException e) {
+            e.printStackTrace();
+            return;
+        } catch (HL7Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        System.out.println("hapiMsg = " + hapiMsg);
+        System.out.println("hapiMsg.getVersion() = " + hapiMsg.getVersion());
+        System.out.println("hapiMsg.printStructure() = " + hapiMsg.printStructure());
+
+    }//GEN-LAST:event_btnMsgTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -750,6 +797,7 @@ public class Interfacing extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnMsgTxt;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cmbA1t;
     private javax.swing.JComboBox<String> cmbA2t;
@@ -795,6 +843,8 @@ public class Interfacing extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblBillNo;
     private javax.swing.JTextField txtA1n;
     private javax.swing.JTextField txtA1p;
@@ -809,5 +859,7 @@ public class Interfacing extends javax.swing.JFrame {
     private javax.swing.JTextField txtA6n;
     private javax.swing.JTextField txtA6p;
     private javax.swing.JTextArea txtLog;
+    private javax.swing.JTextArea txtMsg;
+    private javax.swing.JTextArea txtOut;
     // End of variables declaration//GEN-END:variables
 }
