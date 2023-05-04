@@ -26,6 +26,9 @@ public class Preference {
     }
 
     public List<Analyzer> getAnalyzers() {
+        if(analyzers==null){
+            analyzers = new ArrayList<>();
+        }
         return analyzers;
     }
 
