@@ -67,7 +67,9 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 OutputStream outputStream = clientSocket.getOutputStream();
 
                 String receivedMessage = readMessageFromStream(inputStream); // You'll need to implement a method to read the message from the input stream
+                System.out.println("receivedMessage = " + receivedMessage);
                 String responseMessage = processAnalyzerMessage(receivedMessage);
+                System.out.println("responseMessage = " + responseMessage);
                 writeMessageToStream(outputStream, responseMessage); // You'll need to implement a method to write the message to the output stream
 
                 // Process incoming and outgoing data here

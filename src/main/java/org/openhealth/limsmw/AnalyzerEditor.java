@@ -25,6 +25,7 @@ public class AnalyzerEditor extends JDialog {
     private JTextField tfManufacturer;
     private JTextField tfModel;
     private JTextField tfSerialNumber;
+    JTextField tfPort;
     private JComboBox<Analyzer.InterfaceType> cbInterfaceType;
     private JComboBox<Analyzer.InterfaceProtocol> cbInterfaceProtocol;
     private JComboBox<Analyzer.CommunicationType> cbCommunicationType;
@@ -132,6 +133,13 @@ public class AnalyzerEditor extends JDialog {
 
         c.gridx = 0;
         c.gridy = 8;
+        add(new JLabel("Port:"), c);
+        tfPort = new JTextField(String.valueOf(analyzer.getPort()), 20);
+        c.gridx = 1;
+        add(tfPort, c);
+
+        c.gridx = 0;
+        c.gridy = 9;
         c.gridwidth = 2;
         c.anchor = GridBagConstraints.CENTER;
 
@@ -158,7 +166,6 @@ public class AnalyzerEditor extends JDialog {
 
         c.fill = GridBagConstraints.HORIZONTAL;
         add(buttonsPanel, c);
-
     }
 
     private void saveAnalyzer() {
@@ -166,6 +173,7 @@ public class AnalyzerEditor extends JDialog {
         analyzer.setManufacturer(tfManufacturer.getText());
         analyzer.setModel(tfModel.getText());
         analyzer.setSerialNumber(tfSerialNumber.getText());
+        analyzer.setPort(Integer.parseInt(tfPort.getText()));
         analyzer.setInterfaceType((Analyzer.InterfaceType) cbInterfaceType.getSelectedItem());
         analyzer.setInterfaceProtocol((Analyzer.InterfaceProtocol) cbInterfaceProtocol.getSelectedItem());
         analyzer.setCommunicationType((Analyzer.CommunicationType) cbCommunicationType.getSelectedItem());
