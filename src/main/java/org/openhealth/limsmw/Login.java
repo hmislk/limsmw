@@ -334,7 +334,7 @@ public class Login extends javax.swing.JFrame {
         PrefsController.getPreference().setPassword(txtPassword.getText());
         PrefsController.getPreference().setUrl(txtUrl.getText().trim());
         PrefsController.savePrefs();
-        Interfacing interfacing = new Interfacing();
+        Main interfacing = new Main();
         interfacing.setVisible(true);
         this.dispose();
     }
