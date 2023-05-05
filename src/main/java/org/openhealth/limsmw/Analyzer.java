@@ -17,6 +17,7 @@ public class Analyzer {
     private InterfaceType interfaceType;
     private InterfaceProtocol interfaceProtocol;
     private CommunicationType communicationType;
+    private Encoding encodingType;
     private int baudRate; // only applicable for serial communication
     private String ipAddress; // only applicable for TCP/IP communication
     private int port; // applicable for both serial and TCP/IP communication
@@ -37,6 +38,8 @@ public class Analyzer {
         this.port = port;
     }
 
+    
+    
     // Getters and setters for each field
     public String getName() {
         return name;
@@ -135,6 +138,21 @@ public class Analyzer {
         } else {
             throw new UnsupportedOperationException("Unsupported operating system.");
         }
+    }
+
+    public Encoding getEncodingType() {
+        return encodingType;
+    }
+
+    public void setEncodingType(Encoding encodingType) {
+        this.encodingType = encodingType;
+    }
+
+    public enum Encoding {
+        ASCII,
+        ISO_8859_1,
+        UTF_8,
+        UTF_16,
     }
 
     public enum InterfaceType {

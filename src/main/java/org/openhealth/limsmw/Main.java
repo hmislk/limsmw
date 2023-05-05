@@ -31,6 +31,7 @@ public class Main extends javax.swing.JFrame {
         btnClear = new javax.swing.JButton();
         btnSettings = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -61,6 +62,8 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Analyzers");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,40 +71,44 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 539, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(63, 63, 63)
+                                .addGap(321, 321, 321)
                                 .addComponent(lblBillNo))
-                            .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                            .addComponent(btnSettings, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(433, 433, 433))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
                         .addComponent(btnClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSettings)
                         .addGap(50, 50, 50)
                         .addComponent(lblBillNo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -109,7 +116,6 @@ public class Main extends javax.swing.JFrame {
 
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-
         lstAnalyzersCustom = new javax.swing.JList<Analyzer>();
         lstAnalyzersCustom.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstAnalyzersCustom.setCellRenderer(new AnalyzerListCellRenderer());
@@ -119,23 +125,41 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(lstAnalyzersCustom);
+        jScrollPane2.setViewportView(lstAnalyzersCustom);
         listAnalyzers();
         establishConnections();
     }//GEN-LAST:event_formWindowOpened
 
     private void establishConnections() {
+        txtLog.setText("Interfacing is Starting");
         for (Analyzer analyzer : analyzers) {
+            System.out.println("analyzer = " + analyzer.getName());
             if (analyzer.getInterfaceType() == Analyzer.InterfaceType.SERIAL) {
-                SerialCommHandler serialCommHandler = new SerialCommHandler(analyzer.getPortName(), analyzer.getBaudRate());
-                analyzerCommHandlers.put(analyzer, serialCommHandler);
-            } else if (analyzer.getInterfaceType() == Analyzer.InterfaceType.TCP_IP) {
-                if (analyzer.getCommunicationType() == Analyzer.CommunicationType.SERVER) {
-                    TCPServerCommHandler tcpServerCommHandler = new TCPServerCommHandler(analyzer.getPort());
+                try {
+                    SerialCommHandler serialCommHandler = new SerialCommHandler(analyzer.getPortName(), analyzer.getBaudRate());
+                    analyzerCommHandlers.put(analyzer, serialCommHandler);
+                    txtLog.append("Serial connection established for analyzer: " + analyzer.getName() + "\n");
+                } catch (Exception e) {
+                    txtLog.append("Failed to establish serial connection for analyzer: " + analyzer.getName() + "\n");
+                    e.printStackTrace();
+                }
+            } else if (analyzer.getInterfaceType() == Analyzer.InterfaceType.TCP_IP && analyzer.getCommunicationType() == Analyzer.CommunicationType.SERVER) {
+                try {
+                    TCPServerCommHandler tcpServerCommHandler = new TCPServerCommHandler(analyzer);
                     analyzerCommHandlers.put(analyzer, tcpServerCommHandler);
-                } else if (analyzer.getCommunicationType() == Analyzer.CommunicationType.CLIENT) {
+                    txtLog.append("TCP/IP server connection established for analyzer: " + analyzer.getName() + "\n");
+                } catch (Exception e) {
+                    txtLog.append("Failed to establish TCP/IP server connection for analyzer: " + analyzer.getName() + "\n");
+                    e.printStackTrace();
+                }
+            } else if (analyzer.getInterfaceType() == Analyzer.InterfaceType.TCP_IP && analyzer.getCommunicationType() == Analyzer.CommunicationType.CLIENT) {
+                try {
                     TCPClientCommHandler tcpClientCommHandler = new TCPClientCommHandler(analyzer.getIpAddress(), analyzer.getPort());
                     analyzerCommHandlers.put(analyzer, tcpClientCommHandler);
+                    txtLog.append("TCP/IP client connection established for analyzer: " + analyzer.getName() + "\n");
+                } catch (Exception e) {
+                    txtLog.append("Failed to establish TCP/IP client connection for analyzer: " + analyzer.getName() + "\n");
+                    e.printStackTrace();
                 }
             }
         }
@@ -223,6 +247,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnSettings;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBillNo;
