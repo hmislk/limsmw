@@ -22,6 +22,11 @@ import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.model.v25.message.ACK;
 import java.util.UUID;
 
+import ca.uhn.hl7v2.DefaultHapiContext;
+import ca.uhn.hl7v2.HapiContext;
+import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.parser.Parser;
+
 public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
     private ServerSocket serverSocket;
@@ -72,10 +77,6 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 System.out.println("responseMessage = " + responseMessage);
 
                 writeMessageToStream(outputStream, responseMessage);
-                // Don't forget to close the streams and the client socket when you're done
-                inputStream.close();
-                outputStream.close();
-                clientSocket.close();
             }
         } catch (IOException e) {
             System.err.println("TCP Server error: " + e.getMessage());
@@ -153,12 +154,44 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
         try {
             Message message = parser.parse(receivedMessage);
             String requestBody = "HL7Message=" + receivedMessage;
+            checkMessage(receivedMessage);
+            System.out.println("going to sent rest request");
+            System.out.println("restApiUrl = " + restApiUrl);
+            System.out.println("requestBody = " + requestBody);
             String response = restClient.sendRequestToRestServer(restApiUrl, requestBody);
+            System.out.println("response = " + response);
             return response;
 
         } catch (HL7Exception e) {
             e.printStackTrace();
             return createErrorResponse(e.getMessage());
+        }
+    }
+
+    public void checkMessage(String hl7Message) {
+        // Create a HAPI context and parser
+        HapiContext context = new DefaultHapiContext();
+        Parser parser = context.getPipeParser();
+
+        // Parse the HL7 message
+        Message message = null;
+        String messageType;
+        try {
+            message = parser.parse(hl7Message);
+
+            // Get the message type from the MSH segment
+            MSH msh = (MSH) message.get("MSH");
+            messageType = msh.getField(9, 0).toString();
+            System.out.println("Message type: " + messageType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+        // Determine if the message is an OUL^R22 message
+        if (messageType.equals("OUL^R22")) {
+            System.out.println("messageType = " + messageType);
+        } else {
+            System.out.println("messageType = " + messageType);
         }
     }
 
