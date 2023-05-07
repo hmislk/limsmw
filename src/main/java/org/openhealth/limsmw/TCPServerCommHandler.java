@@ -8,7 +8,8 @@ import static org.openhealth.limsmw.Analyzer.Encoding.ISO_8859_1;
 import static org.openhealth.limsmw.Analyzer.Encoding.UTF_16;
 import static org.openhealth.limsmw.Analyzer.Encoding.UTF_8;
 import ca.uhn.hl7v2.model.v25.segment.MSH;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -123,11 +124,9 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
             System.out.println("isaOulR22 = " + isaOulR22);
             
             String msgType=null;
-            try {
+           
                 msgType = findMessageType(receivedMessage);
-            } catch (HL7Exception ex) {
-                Logger.getLogger(TCPServerCommHandler.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
             System.out.println("msgType = " + msgType);
             
             String restApiUrl = PrefsController.getPreference().getUrl() + "api/limsmw/limsProcessAnalyzerMessage";
@@ -183,7 +182,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 e.printStackTrace();
                 return createErrorResponse(e.getMessage());
             }
-        } catch (UnsupportedEncodingException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(TCPServerCommHandler.class.getName()).log(Level.SEVERE, null, ex);
             return ex.getMessage();
         }
@@ -204,26 +203,22 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
         return false;
     }
 
-   public static String findMessageType(String hl7Message) throws UnsupportedEncodingException, HL7Exception {
-        // Create a HAPI context and parser
-        HapiContext context = new DefaultHapiContext();
-        Parser parser = context.getPipeParser();
+   public static String findMessageType(String hl7Message) {
+    // Create a regular expression pattern for the MSH segment
+    Pattern pattern = Pattern.compile("MSH\\|^~\\\\\\&\\|(\\w{3})");
 
-        // Parse the HL7 message
-        Message message = null;
-        String messageType = null;
-        try {
-            message = parser.parse(hl7Message);
+    // Create a matcher for the regular expression pattern
+    Matcher matcher = pattern.matcher(hl7Message);
 
-            // Get the message type from the MSH segment
-            MSH msh = (MSH) message.get("MSH");
-            messageType = msh.getField(9, 0).toString();
-            return messageType;
-        } catch (HL7Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    // Get the message type from the MSH segment
+    String messageType = null;
+    if (matcher.find()) {
+        messageType = matcher.group(1);
     }
+
+    return messageType;
+}
+
    
    
    
