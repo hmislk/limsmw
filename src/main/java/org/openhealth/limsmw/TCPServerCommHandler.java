@@ -44,17 +44,21 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
     @Override
     public void run() {
         System.out.println("going to run " + analyzer.getName() + " on port " + analyzer.getPort() + ".");
+
+        Socket clientSocket = null;
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
         try {
             serverSocket = new ServerSocket(analyzer.getPort());
             System.out.println("TCP Server started on port " + analyzer.getPort());
 
             while (!Thread.currentThread().isInterrupted()) {
-                Socket clientSocket = serverSocket.accept();
+                clientSocket = serverSocket.accept();
                 System.out.println("New connection from " + clientSocket.getRemoteSocketAddress());
 
-                InputStream inputStream = clientSocket.getInputStream();
+                inputStream = clientSocket.getInputStream();
                 System.out.println("inputStream = " + inputStream);
-                OutputStream outputStream = clientSocket.getOutputStream();
+                outputStream = clientSocket.getOutputStream();
                 System.out.println("outputStream = " + outputStream);
 
                 String receivedMessage = null;
@@ -71,82 +75,37 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 System.out.println("responseMessage = " + responseMessage);
                 if (responseMessage != null) {
                     writeMessageToStream(outputStream, responseMessage);
+                    outputStream.close();
                 }
 
                 // Don't forget to close the streams and the client socket when you're done
-                outputStream.close();
-                inputStream.close();
-                clientSocket.close();
+//                outputStream.close();
+//                inputStream.close();
+//                clientSocket.close();
             }
         } catch (IOException e) {
             System.err.println("TCP Server error: " + e.getMessage());
         } finally {
-            if (serverSocket != null) {
-                try {
-                    serverSocket.close();
-                } catch (IOException e) {
-                    System.err.println("Error closing server socket: " + e.getMessage());
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
                 }
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+                if (clientSocket != null) {
+                    clientSocket.close();
+                }
+                if (serverSocket != null) {
+                    serverSocket.close();
+                }
+            } catch (IOException e) {
+                // handle exception
             }
         }
     }
 
-    private String createAcknowledgementMessage() {
-        return String.valueOf((char) 6); // Return an ACK character (ASCII code 6)
-    }
 
-    private String createAcknowledgementMessage(boolean hl7) {
-        try {
-            // Create a new ACK message
-            ACK ack = new ACK();
-
-            MSH msh = ack.getMSH();
-            msh.getFieldSeparator().setValue("|");
-            msh.getEncodingCharacters().setValue("^~\\&");
-            msh.getVersionID().getVersionID().setValue("2.3");
-            msh.getMessageType().getMessageCode().setValue("ACK");
-            msh.getMessageType().getTriggerEvent().setValue("ACK");
-            msh.getMessageControlID().setValue(generateMessageControlId());
-            msh.getProcessingID().getProcessingID().setValue("P");
-            msh.getCharacterSet(0).setValue("ASCII");
-
-            // Set the MSA segment
-            MSA msa = ack.getMSA();
-            msa.getAcknowledgmentCode().setValue("AA");
-            msa.getMessageControlID().setValue(msh.getMessageControlID().getValue());
-            msa.getTextMessage().setValue("Message processed successfully");
-
-            // Encode the response message and return it as a string
-            PipeParser parser = new PipeParser();
-            return parser.encode(ack);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return createErrorMessageResponse("Error creating acknowledgement message");
-        }
-    }
-
-    private String createErrorMessageResponse(String errorMessage) {
-
-        return null;
-    }
-
-    private String generateMessageControlId() {
-        return UUID.randomUUID().toString();
-    }
-
-    private String readMessageFromStream(InputStream inputStream) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        int ch;
-        while ((ch = inputStream.read()) != -1) {
-            if (ch == 5) {
-                break; // end of message reached
-            }
-            baos.write(ch);
-        }
-        return new String(baos.toByteArray(), StandardCharsets.UTF_8).trim();
-    }
-
-    boolean tmpFlag = true;
 
     private String processAnalyzerMessage(String receivedMessage) {
         System.out.println("receivedMessage = " + receivedMessage);
@@ -166,10 +125,12 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
             }
             connection.setDoOutput(true);
             JSONObject requestBodyJson = new JSONObject();
-            requestBodyJson.put("HL7Message", receivedMessage);
-            String requestBody = requestBodyJson.toString();
+            String encryptedMessage = EncryptionUtils.encrypt(receivedMessage);
+
+            requestBodyJson.put("message", encryptedMessage);
             OutputStream outputStream = connection.getOutputStream();
-            outputStream.write(requestBody.getBytes());
+            String requestBodyString = requestBodyJson.toString();
+            outputStream.write(requestBodyString.getBytes());
             outputStream.flush();
             outputStream.close();
             int responseCode = connection.getResponseCode();

@@ -13,11 +13,15 @@ public class EncryptionUtils {
     private static final String SECRET_KEY = "MySecretKey12345"; // Replace with your own secret key
 
     public static String encrypt(String strToEncrypt) {
+        System.out.println("encrypt");
+        System.out.println("strToEncrypt = " + strToEncrypt.length());
         try {
             SecretKeySpec secretKey = new SecretKeySpec(SECRET_KEY.getBytes(), "AES");
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes()));
+            String strEncrypted = Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes()));
+            System.out.println("strEncrypted = " + strEncrypted.length());
+            return strEncrypted;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
