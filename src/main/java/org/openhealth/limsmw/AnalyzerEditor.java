@@ -30,6 +30,7 @@ public class AnalyzerEditor extends JDialog {
     private JComboBox<Analyzer.InterfaceProtocol> cbInterfaceProtocol;
     private JComboBox<Analyzer.CommunicationType> cbCommunicationType;
     private JTextField tfBaudRate;
+    private JTextField tfIpAddress;
 
     private UpdateAnalyzerListCallback callback;
 
@@ -140,6 +141,13 @@ public class AnalyzerEditor extends JDialog {
 
         c.gridx = 0;
         c.gridy = 9;
+        add(new JLabel("IP Address:"), c);
+        tfIpAddress = new JTextField(analyzer.getIpAddress(), 30);
+        c.gridx = 1;
+        add(tfIpAddress, c);
+
+        c.gridx = 0;
+        c.gridy = 10;
         c.gridwidth = 2;
         c.anchor = GridBagConstraints.CENTER;
 
@@ -178,6 +186,7 @@ public class AnalyzerEditor extends JDialog {
         analyzer.setInterfaceProtocol((Analyzer.InterfaceProtocol) cbInterfaceProtocol.getSelectedItem());
         analyzer.setCommunicationType((Analyzer.CommunicationType) cbCommunicationType.getSelectedItem());
         analyzer.setBaudRate(Integer.parseInt(tfBaudRate.getText()));
+        analyzer.setIpAddress(tfIpAddress.getText());
         if (isNewAnalyzer) {
             analyzerList.add(analyzer);
         }
