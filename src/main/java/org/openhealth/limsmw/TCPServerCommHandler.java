@@ -7,10 +7,16 @@ import static org.openhealth.limsmw.Analyzer.Encoding.ASCII;
 import static org.openhealth.limsmw.Analyzer.Encoding.ISO_8859_1;
 import static org.openhealth.limsmw.Analyzer.Encoding.UTF_16;
 import static org.openhealth.limsmw.Analyzer.Encoding.UTF_8;
-import ca.uhn.hl7v2.model.v25.segment.MSA;
 import ca.uhn.hl7v2.model.v25.segment.MSH;
-import ca.uhn.hl7v2.model.v25.message.ACK;
-import java.util.UUID;
+
+
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+
+import ca.uhn.hl7v2.HL7Exception;
+import ca.uhn.hl7v2.parser.Parser;
+import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.model.Segment;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,16 +26,20 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import ca.uhn.hl7v2.parser.PipeParser;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+
 
 import ca.uhn.hl7v2.DefaultHapiContext;
+import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.HapiContext;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.Parser;
-import java.io.ByteArrayOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
@@ -105,92 +115,118 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
         }
     }
 
-
-
     private String processAnalyzerMessage(String receivedMessage) {
-        System.out.println("receivedMessage = " + receivedMessage);
-        String restApiUrl = PrefsController.getPreference().getUrl() + "api/limsmw/limsProcessAnalyzerMessage";
-        String username = PrefsController.getPreference().getUserName();
-        String password = PrefsController.getPreference().getPassword();
         try {
-            URL url = new URL(restApiUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("Accept", "application/json");
-            if (username != null && password != null) {
-                String credentials = username + ":" + password;
-                String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
-                connection.setRequestProperty("Authorization", "Basic " + encodedCredentials);
+            System.out.println("receivedMessage = " + receivedMessage);
+            
+            boolean isaOulR22 = thisIsOulR22Message(receivedMessage);
+            System.out.println("isaOulR22 = " + isaOulR22);
+            
+            String msgType=null;
+            try {
+                msgType = findMessageType(receivedMessage);
+            } catch (HL7Exception ex) {
+                Logger.getLogger(TCPServerCommHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
-            connection.setDoOutput(true);
-            JSONObject requestBodyJson = new JSONObject();
-            String encryptedMessage = EncryptionUtils.encrypt(receivedMessage);
-
-            requestBodyJson.put("message", encryptedMessage);
-            OutputStream outputStream = connection.getOutputStream();
-            String requestBodyString = requestBodyJson.toString();
-            outputStream.write(requestBodyString.getBytes());
-            outputStream.flush();
-            outputStream.close();
-            int responseCode = connection.getResponseCode();
-            System.out.println("responseCode = " + responseCode);
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
-                    StringBuilder responseBuilder = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        responseBuilder.append(line).append("\n");
-                    }
-                    String response = responseBuilder.toString().trim();
-                    System.out.println("response = " + response);
-                    return response;
+            System.out.println("msgType = " + msgType);
+            
+            String restApiUrl = PrefsController.getPreference().getUrl() + "api/limsmw/limsProcessAnalyzerMessage";
+            String username = PrefsController.getPreference().getUserName();
+            String password = PrefsController.getPreference().getPassword();
+            try {
+                URL url = new URL(restApiUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("POST");
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestProperty("Accept", "application/json");
+                if (username != null && password != null) {
+                    String credentials = username + ":" + password;
+                    String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
+                    connection.setRequestProperty("Authorization", "Basic " + encodedCredentials);
                 }
-            } else {
-                try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
-                    StringBuilder responseBuilder = new StringBuilder();
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        responseBuilder.append(line).append("\n");
+                connection.setDoOutput(true);
+                JSONObject requestBodyJson = new JSONObject();
+                String encryptedMessage = EncryptionUtils.encrypt(receivedMessage);
+                
+                requestBodyJson.put("message", encryptedMessage);
+                OutputStream outputStream = connection.getOutputStream();
+                String requestBodyString = requestBodyJson.toString();
+                outputStream.write(requestBodyString.getBytes());
+                outputStream.flush();
+                outputStream.close();
+                int responseCode = connection.getResponseCode();
+                System.out.println("responseCode = " + responseCode);
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                        StringBuilder responseBuilder = new StringBuilder();
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            responseBuilder.append(line).append("\n");
+                        }
+                        String response = responseBuilder.toString().trim();
+                        System.out.println("response = " + response);
+                        return response;
                     }
-                    String response = responseBuilder.toString().trim();
-                    System.out.println("response = " + response);
-                    return createErrorResponse(response);
+                } else {
+                    try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
+                        StringBuilder responseBuilder = new StringBuilder();
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            responseBuilder.append(line).append("\n");
+                        }
+                        String response = responseBuilder.toString().trim();
+                        System.out.println("response = " + response);
+                        return createErrorResponse(response);
+                    }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return createErrorResponse(e.getMessage());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return createErrorResponse(e.getMessage());
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(TCPServerCommHandler.class.getName()).log(Level.SEVERE, null, ex);
+            return ex.getMessage();
         }
     }
 
-    public void checkMessage(String hl7Message) {
+    public boolean thisIsOulR22Message(String message) {
+        String[] segments = message.split("\r");
+        for (String segment : segments) {
+            String[] fields = segment.split("\\|");
+            if (fields[0].equals("MSH") && fields.length > 8) {
+                String messageType = fields[8];
+                if (messageType.equals("OUL^R22")) {
+                    return true;
+                }
+                break;
+            }
+        }
+        return false;
+    }
+
+   public static String findMessageType(String hl7Message) throws UnsupportedEncodingException, HL7Exception {
         // Create a HAPI context and parser
         HapiContext context = new DefaultHapiContext();
         Parser parser = context.getPipeParser();
 
         // Parse the HL7 message
         Message message = null;
-        String messageType;
+        String messageType = null;
         try {
             message = parser.parse(hl7Message);
 
             // Get the message type from the MSH segment
             MSH msh = (MSH) message.get("MSH");
             messageType = msh.getField(9, 0).toString();
-            System.out.println("Message type: " + messageType);
-        } catch (Exception e) {
+            return messageType;
+        } catch (HL7Exception e) {
             e.printStackTrace();
-            return;
-        }
-        // Determine if the message is an OUL^R22 message
-        if (messageType.equals("OUL^R22")) {
-            System.out.println("messageType = " + messageType);
-        } else {
-            System.out.println("messageType = " + messageType);
+            return null;
         }
     }
-
+   
+   
+   
     private String createErrorResponse(String errorMessage) {
 
         return null;
