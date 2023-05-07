@@ -1,5 +1,6 @@
 package org.openhealth.limsmw;
 
+import org.apache.commons.io.IOUtils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,10 +23,29 @@ import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.model.v25.message.ACK;
 import java.util.UUID;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import ca.uhn.hl7v2.HL7Exception;
+import ca.uhn.hl7v2.app.Application;
+import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.parser.PipeParser;
+import ca.uhn.hl7v2.parser.Parser;
+
 import ca.uhn.hl7v2.DefaultHapiContext;
 import ca.uhn.hl7v2.HapiContext;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.Parser;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Base64;
 
 public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
@@ -56,30 +76,23 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 String receivedMessage = null;
                 String responseMessage = null;
 
-                int ch = inputStream.read();
-                System.out.println("ch = " + ch);
-                System.out.println("ch = " + (Integer)(ch));
-                if (ch == 5) {
-                    System.out.println("If received message is ENQ, send an ACK");
-                    responseMessage = createAcknowledgementMessage();
-                } else {
-                    System.out.println("If received message is not ENQ, read the message from the input stream");
-                    StringBuilder messageBuilder = new StringBuilder();
-                    messageBuilder.append((char) ch);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        System.out.println("line = " + line);
-                        messageBuilder.append(line).append(System.lineSeparator());
-                    }
-                    receivedMessage = messageBuilder.toString().trim();
+                byte[] buffer = new byte[1024];
+                int bytesRead = inputStream.read(buffer);
+                if (bytesRead != -1) {
+                    receivedMessage = new String(buffer, 0, bytesRead);
                     System.out.println("receivedMessage = " + receivedMessage);
                     responseMessage = processAnalyzerMessage(receivedMessage);
                 }
-                System.out.println("receivedMessage = " + receivedMessage);
-                System.out.println("responseMessage = " + responseMessage);
 
-                writeMessageToStream(outputStream, responseMessage);
+                System.out.println("responseMessage = " + responseMessage);
+                if (responseMessage != null) {
+                    writeMessageToStream(outputStream, responseMessage);
+                }
+
+                // Don't forget to close the streams and the client socket when you're done
+                outputStream.close();
+                inputStream.close();
+                clientSocket.close();
             }
         } catch (IOException e) {
             System.err.println("TCP Server error: " + e.getMessage());
@@ -138,34 +151,67 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
     }
 
     private String readMessageFromStream(InputStream inputStream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder messageBuilder = new StringBuilder();
-        String line;
-
-        while ((line = reader.readLine()) != null) {
-            messageBuilder.append(line).append(System.lineSeparator());
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        int ch;
+        while ((ch = inputStream.read()) != -1) {
+            if (ch == 5) {
+                break; // end of message reached
+            }
+            baos.write(ch);
         }
-
-        return messageBuilder.toString().trim();
+        return new String(baos.toByteArray(), StandardCharsets.UTF_8).trim();
     }
 
+    boolean tmpFlag = true;
+
     private String processAnalyzerMessage(String receivedMessage) {
-        RestClient restClient = new RestClient(PrefsController.getPreference().getUserName(), PrefsController.getPreference().getPassword());
-        Parser parser = new PipeParser();
+        System.out.println("receivedMessage = " + receivedMessage);
         String restApiUrl = PrefsController.getPreference().getUrl() + "api/limsmw/limsProcessAnalyzerMessage";
-
+        String username = PrefsController.getPreference().getUserName();
+        String password = PrefsController.getPreference().getPassword();
         try {
-            Message message = parser.parse(receivedMessage);
-            String requestBody = "HL7Message=" + receivedMessage;
-            checkMessage(receivedMessage);
-            System.out.println("going to sent rest request");
-            System.out.println("restApiUrl = " + restApiUrl);
-            System.out.println("requestBody = " + requestBody);
-            String response = restClient.sendRequestToRestServer(restApiUrl, requestBody);
-            System.out.println("response = " + response);
-            return response;
-
-        } catch (HL7Exception e) {
+            URL url = new URL(restApiUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            if (username != null && password != null) {
+                String credentials = username + ":" + password;
+                String encodedCredentials = Base64.getEncoder().encodeToString(credentials.getBytes());
+                connection.setRequestProperty("Authorization", "Basic " + encodedCredentials);
+            }
+            connection.setDoOutput(true);
+            String requestBody = "{\"HL7Message\":\"" + receivedMessage + "\"}";
+            OutputStream outputStream = connection.getOutputStream();
+            outputStream.write(requestBody.getBytes());
+            outputStream.flush();
+            outputStream.close();
+            int responseCode = connection.getResponseCode();
+            System.out.println("responseCode = " + responseCode);
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    StringBuilder responseBuilder = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        responseBuilder.append(line).append("\n");
+                    }
+                    String response = responseBuilder.toString().trim();
+                    System.out.println("response = " + response);
+                    return response;
+                }
+            } else {
+                try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
+                    StringBuilder responseBuilder = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        responseBuilder.append(line).append("\n");
+                    }
+                    String response = responseBuilder.toString().trim();
+                    System.out.println("response = " + response);
+                    return createErrorResponse(response);
+                }
+            }
+        } catch (IOException e) {
             e.printStackTrace();
             return createErrorResponse(e.getMessage());
         }
@@ -205,7 +251,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
     private void writeMessageToStream(OutputStream outputStream, String message) throws IOException {
         Charset charset;
-        if (analyzer == null) {
+        if (analyzer != null) {
             if (analyzer.getEncodingType() == null) {
                 charset = StandardCharsets.UTF_8;
             } else {
