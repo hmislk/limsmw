@@ -11,79 +11,81 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-client -->
+        <!-- Jersey client -->
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
             <version>1.19.4</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.sun.jersey/jersey-client -->
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>1.19.4</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
+
+        <!-- JSON library -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20220924</version>
         </dependency>
+
+        <!-- GSON library -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.9</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-base -->
+
+        <!-- HAPI FHIR Base library -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-base</artifactId>
             <version>6.1.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/ca.uhn.hapi.fhir/hapi-fhir-structures-r5 -->
+
+        <!-- HAPI FHIR Structures R5 library -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-structures-r5</artifactId>
             <version>6.1.3</version>
         </dependency>
+
+        <!-- HAPI FHIR Structures R4 library -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-structures-r4</artifactId>
             <version>5.6.0</version>
         </dependency>
-        
+
+        <!-- jSerialComm library -->
         <dependency>
             <groupId>com.fazecast</groupId>
             <artifactId>jSerialComm</artifactId>
             <version>2.6.2</version>
         </dependency>
 
+        <!-- jSSC library -->
         <dependency>
             <groupId>io.github.java-native</groupId>
             <artifactId>jssc</artifactId>
             <version>2.9.3</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.rxtx/rxtx -->
+        <!-- RXTX library -->
         <dependency>
             <groupId>org.rxtx</groupId>
             <artifactId>rxtx</artifactId>
             <version>2.1.7</version>
         </dependency>
-
         <dependency>
             <groupId>ca.uhn.hapi</groupId>
             <artifactId>hapi-base</artifactId>
             <version>2.3</version>
+            <type>jar</type>
         </dependency>
-        
         <dependency>
             <groupId>ca.uhn.hapi</groupId>
             <artifactId>hapi-structures-v25</artifactId>
             <version>2.3</version>
+            <type>jar</type>
         </dependency>
-
-        
-        
     </dependencies>
+
+
 </project>

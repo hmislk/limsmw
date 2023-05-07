@@ -145,8 +145,10 @@ public class Main extends javax.swing.JFrame {
                 }
             } else if (analyzer.getInterfaceType() == Analyzer.InterfaceType.TCP_IP && analyzer.getCommunicationType() == Analyzer.CommunicationType.SERVER) {
                 try {
+                    System.err.println("Going to start TCPServerCommHandler for  = " + analyzer.getName());
                     TCPServerCommHandler tcpServerCommHandler = new TCPServerCommHandler(analyzer);
                     analyzerCommHandlers.put(analyzer, tcpServerCommHandler);
+                    new Thread(tcpServerCommHandler).start();
                     txtLog.append("TCP/IP server connection established for analyzer: " + analyzer.getName() + "\n");
                 } catch (Exception e) {
                     txtLog.append("Failed to establish TCP/IP server connection for analyzer: " + analyzer.getName() + "\n");
