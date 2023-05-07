@@ -52,6 +52,8 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 String responseMessage = null;
 
                 int ch = inputStream.read();
+                System.out.println("ch = " + ch);
+                System.out.println("ch = " + (Integer)(ch));
                 if (ch == 5) {
                     System.out.println("If received message is ENQ, send an ACK");
                     responseMessage = createAcknowledgementMessage();
@@ -62,6 +64,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     String line;
                     while ((line = reader.readLine()) != null) {
+                        System.out.println("line = " + line);
                         messageBuilder.append(line).append(System.lineSeparator());
                     }
                     receivedMessage = messageBuilder.toString().trim();
