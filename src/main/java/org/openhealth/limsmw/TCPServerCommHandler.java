@@ -1,25 +1,14 @@
 package org.openhealth.limsmw;
 
-import org.apache.commons.io.IOUtils;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
+import org.json.JSONObject;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import static org.openhealth.limsmw.Analyzer.Encoding.ASCII;
 import static org.openhealth.limsmw.Analyzer.Encoding.ISO_8859_1;
 import static org.openhealth.limsmw.Analyzer.Encoding.UTF_16;
 import static org.openhealth.limsmw.Analyzer.Encoding.UTF_8;
-import ca.uhn.hl7v2.parser.Parser;
 import ca.uhn.hl7v2.model.v25.segment.MSA;
 import ca.uhn.hl7v2.model.v25.segment.MSH;
-import ca.uhn.hl7v2.parser.PipeParser;
-import ca.uhn.hl7v2.HL7Exception;
-import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.model.v25.message.ACK;
 import java.util.UUID;
 
@@ -31,18 +20,13 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import ca.uhn.hl7v2.HL7Exception;
-import ca.uhn.hl7v2.app.Application;
-import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.PipeParser;
-import ca.uhn.hl7v2.parser.Parser;
 
 import ca.uhn.hl7v2.DefaultHapiContext;
 import ca.uhn.hl7v2.HapiContext;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.Parser;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
@@ -181,7 +165,9 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 connection.setRequestProperty("Authorization", "Basic " + encodedCredentials);
             }
             connection.setDoOutput(true);
-            String requestBody = "{\"HL7Message\":\"" + receivedMessage + "\"}";
+            JSONObject requestBodyJson = new JSONObject();
+            requestBodyJson.put("HL7Message", receivedMessage);
+            String requestBody = requestBodyJson.toString();
             OutputStream outputStream = connection.getOutputStream();
             outputStream.write(requestBody.getBytes());
             outputStream.flush();
