@@ -189,6 +189,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
     }
 
     public boolean thisIsOulR22Message(String message) {
+        message=message.trim();
         String[] segments = message.split("\r");
         for (String segment : segments) {
             String[] fields = segment.split("\\|");
@@ -204,20 +205,18 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
     }
 
    public static String findMessageType(String hl7Message) {
-    // Create a regular expression pattern for the MSH segment
-    Pattern pattern = Pattern.compile("MSH\\|^~\\\\\\&\\|(\\w{3})");
-
-    // Create a matcher for the regular expression pattern
-    Matcher matcher = pattern.matcher(hl7Message);
-
-    // Get the message type from the MSH segment
+    String[] segments = hl7Message.split("\r");
     String messageType = null;
-    if (matcher.find()) {
-        messageType = matcher.group(1);
+    for (String segment : segments) {
+        if (segment.startsWith("MSH|")) {
+            String[] fields = segment.split("\\|");
+            messageType = fields[8];
+            break;
+        }
     }
-
     return messageType;
 }
+
 
    
    
