@@ -30,7 +30,6 @@ import java.net.Socket;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
-
 import ca.uhn.hl7v2.DefaultHapiContext;
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.HapiContext;
@@ -119,16 +118,9 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
     private String processAnalyzerMessage(String receivedMessage) {
         try {
             System.out.println("receivedMessage = " + receivedMessage);
-            
-            boolean isaOulR22 = thisIsOulR22Message(receivedMessage);
-            System.out.println("isaOulR22 = " + isaOulR22);
-            
-            String msgType=null;
-           
-                msgType = findMessageType(receivedMessage);
-           
+            String msgType = null;
+            msgType = findMessageType(receivedMessage);
             System.out.println("msgType = " + msgType);
-            
             String restApiUrl = PrefsController.getPreference().getUrl() + "api/limsmw/limsProcessAnalyzerMessage";
             String username = PrefsController.getPreference().getUserName();
             String password = PrefsController.getPreference().getPassword();
@@ -145,9 +137,8 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 }
                 connection.setDoOutput(true);
                 JSONObject requestBodyJson = new JSONObject();
-                String encryptedMessage = EncryptionUtils.encrypt(receivedMessage);
-                
-                requestBodyJson.put("message", encryptedMessage);
+                String base64EncodedMessage = Base64.getEncoder().encodeToString(receivedMessage.getBytes(StandardCharsets.UTF_8));
+                requestBodyJson.put("message", base64EncodedMessage);
                 OutputStream outputStream = connection.getOutputStream();
                 String requestBodyString = requestBodyJson.toString();
                 outputStream.write(requestBodyString.getBytes());
@@ -163,8 +154,12 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                             responseBuilder.append(line).append("\n");
                         }
                         String response = responseBuilder.toString().trim();
-                        System.out.println("response = " + response);
-                        return response;
+                        JSONObject responseJson = new JSONObject(response);
+                        String base64EncodedResultMessage = responseJson.getString("result");
+                        byte[] decodedResultMessageBytes = Base64.getDecoder().decode(base64EncodedResultMessage);
+                        String decodedResultMessage = new String(decodedResultMessageBytes, StandardCharsets.UTF_8);
+                        System.out.println("decodedResultMessage = " + decodedResultMessage);
+                        return decodedResultMessage;
                     }
                 } else {
                     try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
@@ -188,39 +183,22 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
         }
     }
 
-    public boolean thisIsOulR22Message(String message) {
-        message=message.trim();
-        String[] segments = message.split("\r");
+ 
+    public static String findMessageType(String hl7Message) {
+        String[] segments = hl7Message.split("\r");
+        System.out.println("segments = " + segments);
+        String messageType = null;
         for (String segment : segments) {
-            String[] fields = segment.split("\\|");
-            if (fields[0].equals("MSH") && fields.length > 8) {
-                String messageType = fields[8];
-                if (messageType.equals("OUL^R22")) {
-                    return true;
-                }
+            System.out.println("segment = " + segment);
+            if (segment.startsWith("MSH|")) {
+                String[] fields = segment.split("\\|");
+                messageType = fields[8];
                 break;
             }
         }
-        return false;
+        return messageType;
     }
 
-   public static String findMessageType(String hl7Message) {
-    String[] segments = hl7Message.split("\r");
-    String messageType = null;
-    for (String segment : segments) {
-        if (segment.startsWith("MSH|")) {
-            String[] fields = segment.split("\\|");
-            messageType = fields[8];
-            break;
-        }
-    }
-    return messageType;
-}
-
-
-   
-   
-   
     private String createErrorResponse(String errorMessage) {
 
         return null;
