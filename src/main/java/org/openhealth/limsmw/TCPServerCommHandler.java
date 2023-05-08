@@ -78,6 +78,8 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 int bytesRead = inputStream.read(buffer);
                 if (bytesRead != -1) {
                     receivedMessage = new String(buffer, 0, bytesRead);
+                    // Remove non-ASCII characters at the beginning of the message
+                    receivedMessage = receivedMessage.replaceAll("^[^\\x20-\\x7E]+", "");
                     System.out.println("receivedMessage = " + receivedMessage);
                     responseMessage = processAnalyzerMessage(receivedMessage);
                 }
@@ -183,7 +185,6 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
         }
     }
 
- 
     public static String findMessageType(String hl7Message) {
         String[] segments = hl7Message.split("\r");
         System.out.println("segments = " + segments);
