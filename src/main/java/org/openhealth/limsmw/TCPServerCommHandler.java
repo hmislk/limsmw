@@ -38,6 +38,7 @@ import ca.uhn.hl7v2.parser.Parser;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,21 +68,25 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 System.out.println("New connection from " + clientSocket.getRemoteSocketAddress());
 
                 inputStream = clientSocket.getInputStream();
-                System.out.println("inputStream = " + inputStream);
+                System.out.println("inputStream = " + new Date());
                 outputStream = clientSocket.getOutputStream();
-                System.out.println("outputStream = " + outputStream);
+                System.out.println("outputStream = " + new Date());
 
                 String receivedMessage = null;
                 String responseMessage = null;
 
                 byte[] buffer = new byte[1024];
+                System.out.println("buffer = " + new Date());
+                
                 int bytesRead = inputStream.read(buffer);
+                System.out.println("bytesRead = " + new Date());
                 if (bytesRead != -1) {
                     receivedMessage = new String(buffer, 0, bytesRead);
-                    // Remove non-ASCII characters at the beginning of the message
+                    System.out.println("receivedMessage = " + new Date());
                     receivedMessage = receivedMessage.replaceAll("^[^\\x20-\\x7E]+", "");
-                    System.out.println("receivedMessage = " + receivedMessage);
+                    System.out.println("receivedMessage after replace= " + new Date());
                     responseMessage = processAnalyzerMessage(receivedMessage);
+                    System.out.println("responseMessage= " + new Date());
                 }
 
                 System.out.println("responseMessage = " + responseMessage);
