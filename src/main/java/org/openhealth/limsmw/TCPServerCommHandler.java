@@ -223,10 +223,8 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
     public static String findMessageType(String hl7Message) {
         String[] segments = hl7Message.split("\r");
-        System.out.println("segments = " + segments);
         String messageType = null;
         for (String segment : segments) {
-            System.out.println("segment = " + segment);
             if (segment.startsWith("MSH|")) {
                 String[] fields = segment.split("\\|");
                 messageType = fields[8];
