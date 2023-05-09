@@ -36,6 +36,7 @@ import ca.uhn.hl7v2.HapiContext;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.Parser;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Base64;
 import java.util.Date;
@@ -77,8 +78,15 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
                 byte[] buffer = new byte[1024];
                 System.out.println("buffer = " + new Date());
-                
-                int bytesRead = inputStream.read(buffer);
+
+                int bytesRead;
+                try {
+                    bytesRead = inputStream.read(buffer);
+                    System.err.println("Socket timeout: " + new Date());
+                } catch (SocketTimeoutException e) {
+                    System.err.println("SocketTimeoutException " + new Date());
+                    continue;
+                }
                 System.out.println("bytesRead = " + new Date());
                 if (bytesRead != -1) {
                     receivedMessage = new String(buffer, 0, bytesRead);
@@ -94,11 +102,6 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                     writeMessageToStream(outputStream, responseMessage);
                     outputStream.close();
                 }
-
-                // Don't forget to close the streams and the client socket when you're done
-//                outputStream.close();
-//                inputStream.close();
-//                clientSocket.close();
             }
         } catch (IOException e) {
             System.err.println("TCP Server error: " + e.getMessage());
@@ -117,7 +120,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                     serverSocket.close();
                 }
             } catch (IOException e) {
-                // handle exception
+                System.out.println("e = " + e);
             }
         }
     }
