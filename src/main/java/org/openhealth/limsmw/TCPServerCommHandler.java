@@ -36,6 +36,7 @@ import ca.uhn.hl7v2.HapiContext;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.Parser;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Base64;
 import java.util.Date;
@@ -56,63 +57,94 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
     public void run() {
         System.out.println("going to run " + analyzer.getName() + " on port " + analyzer.getPort() + ".");
 
-        Socket clientSocket = null;
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
         try {
             serverSocket = new ServerSocket(analyzer.getPort());
             System.out.println("TCP Server started on port " + analyzer.getPort());
 
             while (!Thread.currentThread().isInterrupted()) {
-                clientSocket = serverSocket.accept();
-                System.out.println("New connection from " + clientSocket.getRemoteSocketAddress());
+                Socket clientSocket = null;
+                InputStream inputStream = null;
+                OutputStream outputStream = null;
+                try {
+                    clientSocket = serverSocket.accept();
+                    System.out.println("New connection from " + clientSocket.getRemoteSocketAddress());
+                    clientSocket.setSoTimeout(5000); // 5 seconds timeout
 
-                inputStream = clientSocket.getInputStream();
-                System.out.println("inputStream = " + new Date());
-                outputStream = clientSocket.getOutputStream();
-                System.out.println("outputStream = " + new Date());
+                    inputStream = clientSocket.getInputStream();
+                    System.out.println("inputStream = " + new Date());
+                    outputStream = clientSocket.getOutputStream();
+                    System.out.println("outputStream = " + new Date());
+                    outputStream.write('\n');
+                    System.out.println("write new line = " + new Date());
+                    outputStream.flush();
+                    System.out.println("flushed = " + new Date());
 
-                String receivedMessage = null;
-                String responseMessage = null;
+                    String receivedMessage = null;
+                    String responseMessage = null;
 
-                byte[] buffer = new byte[1024];
-                System.out.println("buffer = " + new Date());
-                
-                int bytesRead = inputStream.read(buffer);
-                System.out.println("bytesRead = " + new Date());
-                if (bytesRead != -1) {
-                    receivedMessage = new String(buffer, 0, bytesRead);
-                    System.out.println("receivedMessage = " + new Date());
-                    receivedMessage = receivedMessage.replaceAll("^[^\\x20-\\x7E]+", "");
-                    System.out.println("receivedMessage after replace= " + new Date());
-                    responseMessage = processAnalyzerMessage(receivedMessage);
-                    System.out.println("responseMessage= " + new Date());
+                    byte[] buffer = new byte[1024];
+                    System.out.println("buffer = " + new Date());
+
+                    int bytesRead;
+                    try {
+                        bytesRead = inputStream.read(buffer);
+                        System.err.println("Socket timeout: " + new Date());
+                    } catch (SocketTimeoutException e) {
+                        System.err.println("SocketTimeoutException " + new Date());
+                        continue;
+                    }
+                    System.out.println("bytesRead = " + new Date());
+                    System.out.println("bytesRead = " + new Date());
+                    if (bytesRead != -1) {
+                        receivedMessage = new String(buffer, 0, bytesRead);
+                        char firstChar = receivedMessage.charAt(0);
+                        int firstCharAsciiValue = (int) firstChar;
+
+                        if (firstCharAsciiValue < 32) {
+                            String[] controlCharacters = {
+                                "NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
+                                "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+                                "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB",
+                                "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"
+                            };
+                            System.out.println("First character: " + controlCharacters[firstCharAsciiValue]);
+                        } else {
+                            System.out.println("First character: " + firstChar);
+                        }
+                        receivedMessage = receivedMessage.replaceAll("^[^\\x20-\\x7E]+", "");
+                        System.out.println("receivedMessage after replace= " + new Date());
+                        responseMessage = processAnalyzerMessage(receivedMessage);
+                        System.out.println("responseMessage= " + new Date());
+                    }
+
+                    System.out.println("responseMessage = " + responseMessage);
+                    if (responseMessage != null) {
+                        System.out.println("going to writeMessageToStream= " + new Date());
+                        writeMessageToStream(outputStream, responseMessage);
+                        System.out.println("completed writeMessageToStream= " + new Date());
+                    }
+                } catch (IOException e) {
+                    System.err.println("TCP Server error: " + e.getMessage());
+                } finally {
+                    try {
+                        if (inputStream != null) {
+                            inputStream.close();
+                        }
+                        if (outputStream != null) {
+                            outputStream.close();
+                        }
+                        if (clientSocket != null) {
+                            clientSocket.close();
+                        }
+                    } catch (IOException e) {
+                        // handle exception
+                    }
                 }
-
-                System.out.println("responseMessage = " + responseMessage);
-                if (responseMessage != null) {
-                    writeMessageToStream(outputStream, responseMessage);
-                    outputStream.close();
-                }
-
-                // Don't forget to close the streams and the client socket when you're done
-//                outputStream.close();
-//                inputStream.close();
-//                clientSocket.close();
             }
         } catch (IOException e) {
             System.err.println("TCP Server error: " + e.getMessage());
         } finally {
             try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-                if (outputStream != null) {
-                    outputStream.close();
-                }
-                if (clientSocket != null) {
-                    clientSocket.close();
-                }
                 if (serverSocket != null) {
                     serverSocket.close();
                 }
