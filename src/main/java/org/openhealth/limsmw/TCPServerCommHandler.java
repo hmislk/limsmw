@@ -55,73 +55,71 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
     @Override
     public void run() {
-        System.out.println("going to run " + analyzer.getName() + " on port " + analyzer.getPort() + ".");
-
+//        System.out.println("going to run " + analyzer.getName() + " on port " + analyzer.getPort() + ".");
         try {
             serverSocket = new ServerSocket(analyzer.getPort());
             System.out.println("TCP Server started on port " + analyzer.getPort());
-
             while (!Thread.currentThread().isInterrupted()) {
                 Socket clientSocket = null;
                 InputStream inputStream = null;
                 OutputStream outputStream = null;
                 try {
                     clientSocket = serverSocket.accept();
-                    System.out.println("New connection from " + clientSocket.getRemoteSocketAddress());
+//                    System.out.println("New connection from " + clientSocket.getRemoteSocketAddress());
                     clientSocket.setSoTimeout(5000); // 5 seconds timeout
 
                     inputStream = clientSocket.getInputStream();
-                    System.out.println("inputStream = " + new Date());
+//                    System.out.println("inputStream = " + new Date());
                     outputStream = clientSocket.getOutputStream();
-                    System.out.println("outputStream = " + new Date());
+//                    System.out.println("outputStream = " + new Date());
                     outputStream.write('\n');
-                    System.out.println("write new line = " + new Date());
+//                    System.out.println("write new line = " + new Date());
                     outputStream.flush();
-                    System.out.println("flushed = " + new Date());
+//                    System.out.println("flushed = " + new Date());
 
                     String receivedMessage = null;
                     String responseMessage = null;
 
                     byte[] buffer = new byte[1024];
-                    System.out.println("buffer = " + new Date());
+//                    System.out.println("buffer = " + new Date());
 
                     int bytesRead;
                     try {
                         bytesRead = inputStream.read(buffer);
-                        System.err.println("Socket timeout: " + new Date());
+//                        System.err.println("Socket timeout: " + new Date());
                     } catch (SocketTimeoutException e) {
-                        System.err.println("SocketTimeoutException " + new Date());
+//                        System.err.println("SocketTimeoutException " + new Date());
                         continue;
                     }
-                    System.out.println("bytesRead = " + new Date());
-                    System.out.println("bytesRead = " + new Date());
+//                    System.out.println("bytesRead = " + new Date());
+//                    System.out.println("bytesRead = " + new Date());
                     if (bytesRead != -1) {
                         receivedMessage = new String(buffer, 0, bytesRead);
                         char firstChar = receivedMessage.charAt(0);
                         int firstCharAsciiValue = (int) firstChar;
 
-                        if (firstCharAsciiValue < 32) {
-                            String[] controlCharacters = {
-                                "NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
-                                "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
-                                "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB",
-                                "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"
-                            };
-                            System.out.println("First character: " + controlCharacters[firstCharAsciiValue]);
-                        } else {
-                            System.out.println("First character: " + firstChar);
-                        }
+//                        if (firstCharAsciiValue < 32) {
+//                            String[] controlCharacters = {
+//                                "NUL", "SOH", "STX", "ETX", "EOT", "ENQ", "ACK", "BEL",
+//                                "BS", "HT", "LF", "VT", "FF", "CR", "SO", "SI",
+//                                "DLE", "DC1", "DC2", "DC3", "DC4", "NAK", "SYN", "ETB",
+//                                "CAN", "EM", "SUB", "ESC", "FS", "GS", "RS", "US"
+//                            };
+//                            System.out.println("First character: " + controlCharacters[firstCharAsciiValue]);
+//                        } else {
+//                            System.out.println("First character: " + firstChar);
+//                        }
                         receivedMessage = receivedMessage.replaceAll("^[^\\x20-\\x7E]+", "");
-                        System.out.println("receivedMessage after replace= " + new Date());
+//                        System.out.println("receivedMessage after replace= " + new Date());
                         responseMessage = processAnalyzerMessage(receivedMessage);
-                        System.out.println("responseMessage= " + new Date());
+//                        System.out.println("responseMessage= " + new Date());
                     }
 
-                    System.out.println("responseMessage = " + responseMessage);
+//                    System.out.println("responseMessage = " + responseMessage);
                     if (responseMessage != null) {
-                        System.out.println("going to writeMessageToStream= " + new Date());
+//                        System.out.println("going to writeMessageToStream= " + new Date());
                         writeMessageToStream(outputStream, responseMessage);
-                        System.out.println("completed writeMessageToStream= " + new Date());
+//                        System.out.println("completed writeMessageToStream= " + new Date());
                     }
                 } catch (IOException e) {
                     System.err.println("TCP Server error: " + e.getMessage());
@@ -156,10 +154,10 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
     private String processAnalyzerMessage(String receivedMessage) {
         try {
-            System.out.println("receivedMessage = " + receivedMessage);
+//            System.out.println("receivedMessage = " + receivedMessage);
             String msgType = null;
             msgType = findMessageType(receivedMessage);
-            System.out.println("msgType = " + msgType);
+            System.out.println("Received msgType = " + msgType);
             String restApiUrl = PrefsController.getPreference().getUrl() + "api/limsmw/limsProcessAnalyzerMessage";
             String username = PrefsController.getPreference().getUserName();
             String password = PrefsController.getPreference().getPassword();
@@ -184,7 +182,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 outputStream.flush();
                 outputStream.close();
                 int responseCode = connection.getResponseCode();
-                System.out.println("responseCode = " + responseCode);
+//                System.out.println("responseCode = " + responseCode);
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                         StringBuilder responseBuilder = new StringBuilder();
@@ -197,7 +195,8 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                         String base64EncodedResultMessage = responseJson.getString("result");
                         byte[] decodedResultMessageBytes = Base64.getDecoder().decode(base64EncodedResultMessage);
                         String decodedResultMessage = new String(decodedResultMessageBytes, StandardCharsets.UTF_8);
-                        System.out.println("decodedResultMessage = " + decodedResultMessage);
+                        msgType = findMessageType(decodedResultMessage);
+                        System.out.println("Response msgType = " + msgType);
                         return decodedResultMessage;
                     }
                 } else {
@@ -208,7 +207,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                             responseBuilder.append(line).append("\n");
                         }
                         String response = responseBuilder.toString().trim();
-                        System.out.println("response = " + response);
+//                        System.out.println("response = " + response);
                         return createErrorResponse(response);
                     }
                 }
