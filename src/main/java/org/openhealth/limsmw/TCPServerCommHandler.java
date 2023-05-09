@@ -154,7 +154,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
     private String processAnalyzerMessage(String receivedMessage) {
         try {
-//            System.out.println("receivedMessage = " + receivedMessage);
+            System.out.println("receivedMessage = " + receivedMessage);
             String msgType = null;
             msgType = findMessageType(receivedMessage);
             System.out.println("Received msgType = " + msgType);
@@ -196,6 +196,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                         byte[] decodedResultMessageBytes = Base64.getDecoder().decode(base64EncodedResultMessage);
                         String decodedResultMessage = new String(decodedResultMessageBytes, StandardCharsets.UTF_8);
                         msgType = findMessageType(decodedResultMessage);
+                        System.out.println("decodedResultMessage = " + decodedResultMessage);
                         System.out.println("Response msgType = " + msgType);
                         return decodedResultMessage;
                     }
