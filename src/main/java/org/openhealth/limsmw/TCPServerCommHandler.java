@@ -176,6 +176,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 JSONObject requestBodyJson = new JSONObject();
                 String base64EncodedMessage = Base64.getEncoder().encodeToString(receivedMessage.getBytes(StandardCharsets.UTF_8));
                 requestBodyJson.put("message", base64EncodedMessage);
+                System.err.println("base64EncodedMessage = " + base64EncodedMessage);
                 OutputStream outputStream = connection.getOutputStream();
                 String requestBodyString = requestBodyJson.toString();
                 outputStream.write(requestBodyString.getBytes());
