@@ -188,6 +188,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                             responseBuilder.append(line).append("\n");
                         }
                         String response = responseBuilder.toString().trim();
+                        LOGGER.info("LIMS response as it is = " + response);
                         JSONObject responseJson = new JSONObject(response);
                         String base64EncodedResultMessage = responseJson.getString("result");
                         byte[] decodedResultMessageBytes = Base64.getDecoder().decode(base64EncodedResultMessage);
@@ -207,7 +208,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                             responseBuilder.append(line).append("\n");
                         }
                         String response = responseBuilder.toString().trim();
-//                        LOGGER.info("response = " + response);
+                        LOGGER.info("response = " + response);
                         return createErrorResponse(response);
                     }
                 }

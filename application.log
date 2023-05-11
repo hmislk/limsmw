@@ -1,0 +1,96 @@
+May 11, 2023 5:30:15 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 6000
+May 11, 2023 5:30:15 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 6000
+May 11, 2023 5:30:23 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 5:30:23 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511145937||QBP^Q11^QBP_Q11|f676459e-4d4c-4aad-b65f-cef7f04c9521|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-27^IHE
+QPD|WOS^Work Order Step^IHE_LABTF|f676459e4d4c4aadb65fcef7f04c9521|32971968
+RCP|I||R
+
+
+May 11, 2023 5:30:24 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = QBP^Q11^QBP_Q11
+May 11, 2023 5:30:24 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDU5Mzd8fFFCUF5RMTFeUUJQX1ExMXxmNjc2NDU5ZS00ZDRjLTRhYWQtYjY1Zi1jZWY3ZjA0Yzk1MjF8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI3XklIRQpRUER8V09TXldvcmsgT3JkZXIgU3RlcF5JSEVfTEFCVEZ8ZjY3NjQ1OWU0ZDRjNGFhZGI2NWZjZWY3ZjA0Yzk1MjF8MzI5NzE5NjgKUkNQfEl8fFIKHAo=
+May 11, 2023 5:30:24 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 400
+May 11, 2023 5:31:51 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 6000
+May 11, 2023 5:31:51 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 6000
+May 11, 2023 5:31:59 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 5:31:59 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511145937||QBP^Q11^QBP_Q11|f676459e-4d4c-4aad-b65f-cef7f04c9521|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-27^IHE
+QPD|WOS^Work Order Step^IHE_LABTF|f676459e4d4c4aadb65fcef7f04c9521|32971968
+RCP|I||R
+
+
+May 11, 2023 5:31:59 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = QBP^Q11^QBP_Q11
+May 11, 2023 5:32:00 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDU5Mzd8fFFCUF5RMTFeUUJQX1ExMXxmNjc2NDU5ZS00ZDRjLTRhYWQtYjY1Zi1jZWY3ZjA0Yzk1MjF8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI3XklIRQpRUER8V09TXldvcmsgT3JkZXIgU3RlcF5JSEVfTEFCVEZ8ZjY3NjQ1OWU0ZDRjNGFhZGI2NWZjZWY3ZjA0Yzk1MjF8MzI5NzE5NjgKUkNQfEl8fFIKHAo=
+May 11, 2023 5:32:00 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 400
+May 11, 2023 5:33:51 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 6000
+May 11, 2023 5:33:51 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 6000
+May 11, 2023 5:33:59 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 5:33:59 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511145937||QBP^Q11^QBP_Q11|f676459e-4d4c-4aad-b65f-cef7f04c9521|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-27^IHE
+QPD|WOS^Work Order Step^IHE_LABTF|f676459e4d4c4aadb65fcef7f04c9521|32971968
+RCP|I||R
+
+
+May 11, 2023 5:33:59 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = QBP^Q11^QBP_Q11
+May 11, 2023 5:33:59 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDU5Mzd8fFFCUF5RMTFeUUJQX1ExMXxmNjc2NDU5ZS00ZDRjLTRhYWQtYjY1Zi1jZWY3ZjA0Yzk1MjF8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI3XklIRQpRUER8V09TXldvcmsgT3JkZXIgU3RlcF5JSEVfTEFCVEZ8ZjY3NjQ1OWU0ZDRjNGFhZGI2NWZjZWY3ZjA0Yzk1MjF8MzI5NzE5NjgKUkNQfEl8fFIKHAo=
+May 11, 2023 5:33:59 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 400
+May 11, 2023 5:33:59 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: response = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Payara Server  5.2022.5 #badassfish - Error report</title><style type="text/css"><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 400 - Bad Request</h1><hr/><p><b>type</b> Status report</p><p><b>message</b>Bad Request</p><p><b>description</b>The request sent by the client was syntactically incorrect.</p><hr/><h3>Payara Server  5.2022.5 #badassfish</h3></body></html>
+May 11, 2023 6:11:00 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 6000
+May 11, 2023 6:11:00 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 6000
+May 11, 2023 6:39:57 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 6000
+May 11, 2023 6:39:58 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 6000
+May 11, 2023 6:40:09 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 6:40:09 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511145937||QBP^Q11^QBP_Q11|f676459e-4d4c-4aad-b65f-cef7f04c9521|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-27^IHE
+QPD|WOS^Work Order Step^IHE_LABTF|f676459e4d4c4aadb65fcef7f04c9521|32971968
+RCP|I||R
+
+
+May 11, 2023 6:40:09 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = QBP^Q11^QBP_Q11
+May 11, 2023 6:40:09 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDU5Mzd8fFFCUF5RMTFeUUJQX1ExMXxmNjc2NDU5ZS00ZDRjLTRhYWQtYjY1Zi1jZWY3ZjA0Yzk1MjF8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI3XklIRQpRUER8V09TXldvcmsgT3JkZXIgU3RlcF5JSEVfTEFCVEZ8ZjY3NjQ1OWU0ZDRjNGFhZGI2NWZjZWY3ZjA0Yzk1MjF8MzI5NzE5NjgKUkNQfEl8fFIKHAo=
+May 11, 2023 6:40:09 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 400
+May 11, 2023 6:40:09 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: response = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Payara Server  5.2022.5 #badassfish - Error report</title><style type="text/css"><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 400 - Bad Request</h1><hr/><p><b>type</b> Status report</p><p><b>message</b>Bad Request</p><p><b>description</b>The request sent by the client was syntactically incorrect.</p><hr/><h3>Payara Server  5.2022.5 #badassfish</h3></body></html>
+May 11, 2023 6:42:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 6:42:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511145937||QBP^Q11^QBP_Q11|f676459e-4d4c-4aad-b65f-cef7f04c9521|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-27^IHE
+QPD|WOS^Work Order Step^IHE_LABTF|f676459e4d4c4aadb65fcef7f04c9521|32971968
+RCP|I||R
+
+
+May 11, 2023 6:42:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = QBP^Q11^QBP_Q11
+May 11, 2023 6:42:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDU5Mzd8fFFCUF5RMTFeUUJQX1ExMXxmNjc2NDU5ZS00ZDRjLTRhYWQtYjY1Zi1jZWY3ZjA0Yzk1MjF8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI3XklIRQpRUER8V09TXldvcmsgT3JkZXIgU3RlcF5JSEVfTEFCVEZ8ZjY3NjQ1OWU0ZDRjNGFhZGI2NWZjZWY3ZjA0Yzk1MjF8MzI5NzE5NjgKUkNQfEl8fFIKHAo=
+May 11, 2023 6:42:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 400
+May 11, 2023 6:42:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: response = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Payara Server  5.2022.5 #badassfish - Error report</title><style type="text/css"><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 400 - Bad Request</h1><hr/><p><b>type</b> Status report</p><p><b>message</b>Bad Request</p><p><b>description</b>The request sent by the client was syntactically incorrect.</p><hr/><h3>Payara Server  5.2022.5 #badassfish</h3></body></html>

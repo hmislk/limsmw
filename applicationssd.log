@@ -1,0 +1,126 @@
+May 11, 2023 5:16:13 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 0
+May 11, 2023 5:16:13 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 0
+May 11, 2023 5:16:53 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 6000
+May 11, 2023 5:16:53 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 6000
+May 11, 2023 5:17:14 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 5:17:14 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511143418||OUL^R22^OUL_R22|11b511e6-4655-4643-9bce-e5bfff81aa3a|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-29^IHE
+SPM|1|MANORI32983187||SER|||||||P|||||||
+OBR||""||ALT-GPT^ALT-GPT^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|ALT-GPT^ALT-GPT^A400||38.4902458|U/L^U/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230511200409
+OBR||""||AST-GOT^AST-GOT^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|AST-GOT^AST-GOT^A400||21.4052391|U/L^U/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230511200418
+OBR||""||CREATININE^CREATININE^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|CREATININE^CREATININE^A400||1.08918381|mg/dL^mg/dL^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230511200136
+OBR||""||CRP^CRP^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|CRP^CRP^A400||5.4411006|mg/L^mg/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834
+
+May 11, 2023 5:17:14 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = OUL^R22^OUL_R22
+May 11, 2023 5:17:14 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDM0MTh8fE9VTF5SMjJeT1VMX1IyMnwxMWI1MTFlNi00NjU1LTQ2NDMtOWJjZS1lNWJmZmY4MWFhM2F8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI5XklIRQpTUE18MXxNQU5PUkkzMjk4MzE4N3x8U0VSfHx8fHx8fFB8fHx8fHx8Ck9CUnx8IiJ8fEFMVC1HUFReQUxULUdQVF5BNDAwfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fApPUkN8T0t8fHx8Q018fHx8MjAyMzA1MTExNDM0MTgKT0JYfDF8Tk18QUxULUdQVF5BTFQtR1BUXkE0MDB8fDM4LjQ5MDI0NTh8VS9MXlUvTF5BNDAwfHxOT05FfHx8Rnx8fHx8QURNSU58fEE0MDBeQmlvc3lzdGVtc344MzQwMDIzNTVeQmlvc3lzdGVtc3wyMDIzMDUxMTIwMDQwOQpPQlJ8fCIifHxBU1QtR09UXkFTVC1HT1ReQTQwMHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHwKT1JDfE9LfHx8fENNfHx8fDIwMjMwNTExMTQzNDE4Ck9CWHwxfE5NfEFTVC1HT1ReQVNULUdPVF5BNDAwfHwyMS40MDUyMzkxfFUvTF5VL0xeQTQwMHx8Tk9ORXx8fEZ8fHx8fEFETUlOfHxBNDAwXkJpb3N5c3RlbXN+ODM0MDAyMzU1XkJpb3N5c3RlbXN8MjAyMzA1MTEyMDA0MTgKT0JSfHwiInx8Q1JFQVRJTklORV5DUkVBVElOSU5FXkE0MDB8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8Ck9SQ3xPS3x8fHxDTXx8fHwyMDIzMDUxMTE0MzQxOApPQlh8MXxOTXxDUkVBVElOSU5FXkNSRUFUSU5JTkVeQTQwMHx8MS4wODkxODM4MXxtZy9kTF5tZy9kTF5BNDAwfHxOT05FfHx8Rnx8fHx8QURNSU58fEE0MDBeQmlvc3lzdGVtc344MzQwMDIzNTVeQmlvc3lzdGVtc3wyMDIzMDUxMTIwMDEzNgpPQlJ8fCIifHxDUlBeQ1JQXkE0MDB8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8Ck9SQ3xPS3x8fHxDTXx8fHwyMDIzMDUxMTE0MzQxOApPQlh8MXxOTXxDUlBeQ1JQXkE0MDB8fDUuNDQxMTAwNnxtZy9MXm1nL0xeQTQwMHx8Tk9ORXx8fEZ8fHx8fEFETUlOfHxBNDAwXkJpb3N5c3RlbXN+ODM0Cg==
+May 11, 2023 5:17:14 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 200
+May 11, 2023 5:17:14 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Encoded Message Received from LIMS = TVNIfF5+XCZ8SG9zdHxIb3N0IHByb3ZpZGVyfEJBNDAwfEJpb3N5c3RlbXN8MjAyMzA1MTExNzE3MTcuODA3KzA1MzB8fEFDS15SMjJeQUNLfDMwMTAxfFB8Mi41LjENTVNBfEFBfDExYjUxMWU2LTQ2NTUtNDY0My05YmNlLWU1YmZmZjgxYWEzYQ0=
+May 11, 2023 5:17:14 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Decoded Message Received from LIMS = MSH|^~\&|Host|Host provider|BA400|Biosystems|20230511171717.807+0530||ACK^R22^ACK|30101|P|2.5.1MSA|AA|11b511e6-4655-4643-9bce-e5bfff81aa3a
+May 11, 2023 5:17:14 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS sent Message Type = ACK^R22^ACK
+May 11, 2023 5:18:28 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 5:18:28 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511143418||OUL^R22^OUL_R22|11b511e6-4655-4643-9bce-e5bfff81aa3a|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-29^IHE
+SPM|1|MANORI32983187||SER|||||||P|||||||
+OBR||""||ALT-GPT^ALT-GPT^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|ALT-GPT^ALT-GPT^A400||38.4902458|U/L^U/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230511200409
+OBR||""||AST-GOT^AST-GOT^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|AST-GOT^AST-GOT^A400||21.4052391|U/L^U/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230511200418
+OBR||""||CREATININE^CREATININE^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|CREATININE^CREATININE^A400||1.08918381|mg/dL^mg/dL^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230511200136
+OBR||""||CRP^CRP^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|CRP^CRP^A400||5.4411006|mg/L^mg/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834
+
+May 11, 2023 5:18:28 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = OUL^R22^OUL_R22
+May 11, 2023 5:18:28 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDM0MTh8fE9VTF5SMjJeT1VMX1IyMnwxMWI1MTFlNi00NjU1LTQ2NDMtOWJjZS1lNWJmZmY4MWFhM2F8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI5XklIRQpTUE18MXxNQU5PUkkzMjk4MzE4N3x8U0VSfHx8fHx8fFB8fHx8fHx8Ck9CUnx8IiJ8fEFMVC1HUFReQUxULUdQVF5BNDAwfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fApPUkN8T0t8fHx8Q018fHx8MjAyMzA1MTExNDM0MTgKT0JYfDF8Tk18QUxULUdQVF5BTFQtR1BUXkE0MDB8fDM4LjQ5MDI0NTh8VS9MXlUvTF5BNDAwfHxOT05FfHx8Rnx8fHx8QURNSU58fEE0MDBeQmlvc3lzdGVtc344MzQwMDIzNTVeQmlvc3lzdGVtc3wyMDIzMDUxMTIwMDQwOQpPQlJ8fCIifHxBU1QtR09UXkFTVC1HT1ReQTQwMHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHwKT1JDfE9LfHx8fENNfHx8fDIwMjMwNTExMTQzNDE4Ck9CWHwxfE5NfEFTVC1HT1ReQVNULUdPVF5BNDAwfHwyMS40MDUyMzkxfFUvTF5VL0xeQTQwMHx8Tk9ORXx8fEZ8fHx8fEFETUlOfHxBNDAwXkJpb3N5c3RlbXN+ODM0MDAyMzU1XkJpb3N5c3RlbXN8MjAyMzA1MTEyMDA0MTgKT0JSfHwiInx8Q1JFQVRJTklORV5DUkVBVElOSU5FXkE0MDB8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8Ck9SQ3xPS3x8fHxDTXx8fHwyMDIzMDUxMTE0MzQxOApPQlh8MXxOTXxDUkVBVElOSU5FXkNSRUFUSU5JTkVeQTQwMHx8MS4wODkxODM4MXxtZy9kTF5tZy9kTF5BNDAwfHxOT05FfHx8Rnx8fHx8QURNSU58fEE0MDBeQmlvc3lzdGVtc344MzQwMDIzNTVeQmlvc3lzdGVtc3wyMDIzMDUxMTIwMDEzNgpPQlJ8fCIifHxDUlBeQ1JQXkE0MDB8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8Ck9SQ3xPS3x8fHxDTXx8fHwyMDIzMDUxMTE0MzQxOApPQlh8MXxOTXxDUlBeQ1JQXkE0MDB8fDUuNDQxMTAwNnxtZy9MXm1nL0xeQTQwMHx8Tk9ORXx8fEZ8fHx8fEFETUlOfHxBNDAwXkJpb3N5c3RlbXN+ODM0Cg==
+May 11, 2023 5:18:28 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 200
+May 11, 2023 5:18:28 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Encoded Message Received from LIMS = TVNIfF5+XCZ8SG9zdHxIb3N0IHByb3ZpZGVyfEJBNDAwfEJpb3N5c3RlbXN8MjAyMzA1MTExNzE4MzEuNDUrMDUzMHx8QUNLXlIyMl5BQ0t8MzAyMDF8UHwyLjUuMQ1NU0F8QUF8MTFiNTExZTYtNDY1NS00NjQzLTliY2UtZTViZmZmODFhYTNhDQ==
+May 11, 2023 5:18:28 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Decoded Message Received from LIMS = MSH|^~\&|Host|Host provider|BA400|Biosystems|20230511171831.45+0530||ACK^R22^ACK|30201|P|2.5.1MSA|AA|11b511e6-4655-4643-9bce-e5bfff81aa3a
+May 11, 2023 5:18:28 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS sent Message Type = ACK^R22^ACK
+May 11, 2023 5:19:36 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 5:19:36 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511143418||OUL^R22^OUL_R22|11b511e6-4655-4643-9bce-e5bfff81aa3a|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-29^IHE
+SPM|1|MANORI32983187||SER|||||||P|||||||
+OBR||""||ALT-GPT^ALT-GPT^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|ALT-GPT^ALT-GPT^A400||38.4902458|U/L^U/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230511200409
+OBR||""||AST-GOT^AST-GOT^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|AST-GOT^AST-GOT^A400||21.4052391|U/L^U/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230511200418
+OBR||""||CREATININE^CREATININE^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|CREATININE^CREATININE^A400||1.08918381|mg/dL^mg/dL^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230511200136
+OBR||""||CRP^CRP^A400|||||||||||||||||||||||||
+ORC|OK||||CM||||20230511143418
+OBX|1|NM|CRP^CRP^A400||5.4411006|mg/L^mg/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834
+
+May 11, 2023 5:19:36 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = OUL^R22^OUL_R22
+May 11, 2023 5:19:36 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDM0MTh8fE9VTF5SMjJeT1VMX1IyMnwxMWI1MTFlNi00NjU1LTQ2NDMtOWJjZS1lNWJmZmY4MWFhM2F8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI5XklIRQpTUE18MXxNQU5PUkkzMjk4MzE4N3x8U0VSfHx8fHx8fFB8fHx8fHx8Ck9CUnx8IiJ8fEFMVC1HUFReQUxULUdQVF5BNDAwfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fApPUkN8T0t8fHx8Q018fHx8MjAyMzA1MTExNDM0MTgKT0JYfDF8Tk18QUxULUdQVF5BTFQtR1BUXkE0MDB8fDM4LjQ5MDI0NTh8VS9MXlUvTF5BNDAwfHxOT05FfHx8Rnx8fHx8QURNSU58fEE0MDBeQmlvc3lzdGVtc344MzQwMDIzNTVeQmlvc3lzdGVtc3wyMDIzMDUxMTIwMDQwOQpPQlJ8fCIifHxBU1QtR09UXkFTVC1HT1ReQTQwMHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHwKT1JDfE9LfHx8fENNfHx8fDIwMjMwNTExMTQzNDE4Ck9CWHwxfE5NfEFTVC1HT1ReQVNULUdPVF5BNDAwfHwyMS40MDUyMzkxfFUvTF5VL0xeQTQwMHx8Tk9ORXx8fEZ8fHx8fEFETUlOfHxBNDAwXkJpb3N5c3RlbXN+ODM0MDAyMzU1XkJpb3N5c3RlbXN8MjAyMzA1MTEyMDA0MTgKT0JSfHwiInx8Q1JFQVRJTklORV5DUkVBVElOSU5FXkE0MDB8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8Ck9SQ3xPS3x8fHxDTXx8fHwyMDIzMDUxMTE0MzQxOApPQlh8MXxOTXxDUkVBVElOSU5FXkNSRUFUSU5JTkVeQTQwMHx8MS4wODkxODM4MXxtZy9kTF5tZy9kTF5BNDAwfHxOT05FfHx8Rnx8fHx8QURNSU58fEE0MDBeQmlvc3lzdGVtc344MzQwMDIzNTVeQmlvc3lzdGVtc3wyMDIzMDUxMTIwMDEzNgpPQlJ8fCIifHxDUlBeQ1JQXkE0MDB8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8Ck9SQ3xPS3x8fHxDTXx8fHwyMDIzMDUxMTE0MzQxOApPQlh8MXxOTXxDUlBeQ1JQXkE0MDB8fDUuNDQxMTAwNnxtZy9MXm1nL0xeQTQwMHx8Tk9ORXx8fEZ8fHx8fEFETUlOfHxBNDAwXkJpb3N5c3RlbXN+ODM0Cg==
+May 11, 2023 5:19:36 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 200
+May 11, 2023 5:19:36 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Encoded Message Received from LIMS = TVNIfF5+XCZ8SG9zdHxIb3N0IHByb3ZpZGVyfEJBNDAwfEJpb3N5c3RlbXN8MjAyMzA1MTExNzE5MzkuMTkyKzA1MzB8fEFDS15SMjJeQUNLfDMwNDAxfFB8Mi41LjENTVNBfEFBfDExYjUxMWU2LTQ2NTUtNDY0My05YmNlLWU1YmZmZjgxYWEzYQ0=
+May 11, 2023 5:19:36 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Decoded Message Received from LIMS = MSH|^~\&|Host|Host provider|BA400|Biosystems|20230511171939.192+0530||ACK^R22^ACK|30401|P|2.5.1MSA|AA|11b511e6-4655-4643-9bce-e5bfff81aa3a
+May 11, 2023 5:19:36 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS sent Message Type = ACK^R22^ACK
+May 11, 2023 5:20:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 5:20:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511145937||QBP^Q11^QBP_Q11|f676459e-4d4c-4aad-b65f-cef7f04c9521|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-27^IHE
+QPD|WOS^Work Order Step^IHE_LABTF|f676459e4d4c4aadb65fcef7f04c9521|32971968
+RCP|I||R
+
+
+May 11, 2023 5:20:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = QBP^Q11^QBP_Q11
+May 11, 2023 5:20:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDU5Mzd8fFFCUF5RMTFeUUJQX1ExMXxmNjc2NDU5ZS00ZDRjLTRhYWQtYjY1Zi1jZWY3ZjA0Yzk1MjF8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI3XklIRQpRUER8V09TXldvcmsgT3JkZXIgU3RlcF5JSEVfTEFCVEZ8ZjY3NjQ1OWU0ZDRjNGFhZGI2NWZjZWY3ZjA0Yzk1MjF8MzI5NzE5NjgKUkNQfEl8fFIKHAo=
+May 11, 2023 5:20:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 400
+May 11, 2023 5:21:42 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 5:21:42 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511145937||QBP^Q11^QBP_Q11|f676459e-4d4c-4aad-b65f-cef7f04c9521|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-27^IHE
+QPD|WOS^Work Order Step^IHE_LABTF|f676459e4d4c4aadb65fcef7f04c9521|32971968
+RCP|I||R
+
+
+May 11, 2023 5:21:42 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = QBP^Q11^QBP_Q11
+May 11, 2023 5:21:42 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDU5Mzd8fFFCUF5RMTFeUUJQX1ExMXxmNjc2NDU5ZS00ZDRjLTRhYWQtYjY1Zi1jZWY3ZjA0Yzk1MjF8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI3XklIRQpRUER8V09TXldvcmsgT3JkZXIgU3RlcF5JSEVfTEFCVEZ8ZjY3NjQ1OWU0ZDRjNGFhZGI2NWZjZWY3ZjA0Yzk1MjF8MzI5NzE5NjgKUkNQfEl8fFIKHAo=
+May 11, 2023 5:21:42 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 400
