@@ -150,10 +150,10 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
     private String processAnalyzerMessage(String receivedMessage) {
         LOGGER.info("Process Analyzer Message");
         try {
-            LOGGER.info("receivedMessage = " + receivedMessage);
+            LOGGER.info("Message Received from Analyzer = " + receivedMessage);
             String msgType = null;
             msgType = findMessageType(receivedMessage);
-            LOGGER.info("Received msgType = " + msgType);
+            LOGGER.info("Analyzer Message Type = " + msgType);
             String restApiUrl = PrefsController.getPreference().getUrl() + "api/limsmw/limsProcessAnalyzerMessage";
             String username = PrefsController.getPreference().getUserName();
             String password = PrefsController.getPreference().getPassword();
@@ -172,14 +172,14 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 JSONObject requestBodyJson = new JSONObject();
                 String base64EncodedMessage = Base64.getEncoder().encodeToString(receivedMessage.getBytes(StandardCharsets.UTF_8));
                 requestBodyJson.put("message", base64EncodedMessage);
-                LOGGER.info("base64EncodedMessage = " + base64EncodedMessage);
+                LOGGER.info("Message Received from Analyzer Encoded = " + base64EncodedMessage);
                 OutputStream outputStream = connection.getOutputStream();
                 String requestBodyString = requestBodyJson.toString();
                 outputStream.write(requestBodyString.getBytes());
                 outputStream.flush();
                 outputStream.close();
                 int responseCode = connection.getResponseCode();
-//                LOGGER.info("responseCode = " + responseCode);
+                LOGGER.info("LIMS response Code = " + responseCode);
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                         StringBuilder responseBuilder = new StringBuilder();
@@ -193,8 +193,10 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                         byte[] decodedResultMessageBytes = Base64.getDecoder().decode(base64EncodedResultMessage);
                         String decodedResultMessage = new String(decodedResultMessageBytes, StandardCharsets.UTF_8);
                         msgType = findMessageType(decodedResultMessage);
-                        LOGGER.info("decodedResultMessage = " + decodedResultMessage);
-                        LOGGER.info("Response msgType = " + msgType);
+                        LOGGER.info("Encoded Message Received from LIMS = " + base64EncodedResultMessage);
+                        
+                        LOGGER.info("Decoded Message Received from LIMS = " + decodedResultMessage);
+                        LOGGER.info("LIMS sent Message Type = " + msgType);
                         return decodedResultMessage;
                     }
                 } else {
