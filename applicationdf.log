@@ -1,0 +1,18 @@
+May 11, 2023 5:26:52 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 6000
+May 11, 2023 5:26:52 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 6000
+May 11, 2023 5:27:23 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 11, 2023 5:27:23 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230511145937||QBP^Q11^QBP_Q11|f676459e-4d4c-4aad-b65f-cef7f04c9521|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-27^IHE
+QPD|WOS^Work Order Step^IHE_LABTF|f676459e4d4c4aadb65fcef7f04c9521|32971968
+RCP|I||R
+
+
+May 11, 2023 5:27:23 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = QBP^Q11^QBP_Q11
+May 11, 2023 5:27:23 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTExNDU5Mzd8fFFCUF5RMTFeUUJQX1ExMXxmNjc2NDU5ZS00ZDRjLTRhYWQtYjY1Zi1jZWY3ZjA0Yzk1MjF8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI3XklIRQpRUER8V09TXldvcmsgT3JkZXIgU3RlcF5JSEVfTEFCVEZ8ZjY3NjQ1OWU0ZDRjNGFhZGI2NWZjZWY3ZjA0Yzk1MjF8MzI5NzE5NjgKUkNQfEl8fFIKHAo=
+May 11, 2023 5:27:23 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 400
