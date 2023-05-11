@@ -154,7 +154,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
     private String processAnalyzerMessage(String receivedMessage) {
         try {
-            System.out.println("receivedMessage = " + receivedMessage);
+            System.out.println("Received from Analyser Decoded Message = " + receivedMessage);
             String msgType = null;
             msgType = findMessageType(receivedMessage);
             System.out.println("Received msgType = " + msgType);
@@ -176,7 +176,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 JSONObject requestBodyJson = new JSONObject();
                 String base64EncodedMessage = Base64.getEncoder().encodeToString(receivedMessage.getBytes(StandardCharsets.UTF_8));
                 requestBodyJson.put("message", base64EncodedMessage);
-                System.err.println("base64EncodedMessage = " + base64EncodedMessage);
+                System.err.println("Received from Analyzer Encoded Message = " + base64EncodedMessage);
                 OutputStream outputStream = connection.getOutputStream();
                 String requestBodyString = requestBodyJson.toString();
                 outputStream.write(requestBodyString.getBytes());
@@ -197,8 +197,8 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                         byte[] decodedResultMessageBytes = Base64.getDecoder().decode(base64EncodedResultMessage);
                         String decodedResultMessage = new String(decodedResultMessageBytes, StandardCharsets.UTF_8);
                         msgType = findMessageType(decodedResultMessage);
-                        System.out.println("decodedResultMessage = " + decodedResultMessage);
-                        System.out.println("Response msgType = " + msgType);
+                        System.out.println("Received from LIMS Encoded Message = " + base64EncodedResultMessage);
+                        System.out.println("Response from LIMS Decoded Message = " + decodedResultMessage);
                         return decodedResultMessage;
                     }
                 } else {
