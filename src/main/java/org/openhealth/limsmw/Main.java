@@ -138,11 +138,16 @@ public class Main extends javax.swing.JFrame {
                 try {
                     SerialCommHandler serialCommHandler = new SerialCommHandler(analyzer.getPortName(), analyzer.getBaudRate());
                     analyzerCommHandlers.put(analyzer, serialCommHandler);
+                    serialCommHandler.connect();  // Establish the connection
                     txtLog.append("Serial connection established for analyzer: " + analyzer.getName() + "\n");
+                    // Start listening
+                    serialCommHandler.startListening();
+                    txtLog.append("Started listening to analyzer: " + analyzer.getName() + "\n");
                 } catch (Exception e) {
-                    txtLog.append("Failed to establish serial connection for analyzer: " + analyzer.getName() + "\n");
+                    txtLog.append("Failed to establish serial connection or start listening for analyzer: " + analyzer.getName() + "\n");
                     e.printStackTrace();
                 }
+
             } else if (analyzer.getInterfaceType() == Analyzer.InterfaceType.TCP_IP && analyzer.getCommunicationType() == Analyzer.CommunicationType.SERVER) {
                 try {
                     System.err.println("Going to start TCPServerCommHandler for  = " + analyzer.getName());
