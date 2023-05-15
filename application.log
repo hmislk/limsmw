@@ -5916,3 +5916,11 @@ May 15, 2023 2:48:29 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyz
 INFO: Decoded Message Received from LIMS = MSH|^~\&|Host|Host provider|BA400|Biosystems|20230515144829.21+0530||ACK^R22^ACK|61701|P|2.5.1MSA|AA|ac3a914a-65e5-428f-a282-11608695f815
 May 15, 2023 2:48:29 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
 INFO: LIMS sent Message Type = ACK^R22^ACK
+May 15, 2023 4:00:27 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 11000
+May 15, 2023 4:00:27 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 11000
+May 15, 2023 4:01:32 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 11000
+May 15, 2023 4:01:32 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 11000
