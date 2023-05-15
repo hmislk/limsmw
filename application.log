@@ -94,3 +94,7 @@ May 11, 2023 6:42:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyz
 INFO: LIMS response Code = 400
 May 11, 2023 6:42:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
 INFO: response = <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Payara Server  5.2022.5 #badassfish - Error report</title><style type="text/css"><!--H1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} H2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} H3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} BODY {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} B {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} P {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;}A {color : black;}HR {color : #525D76;}--></style> </head><body><h1>HTTP Status 400 - Bad Request</h1><hr/><p><b>type</b> Status report</p><p><b>message</b>Bad Request</p><p><b>description</b>The request sent by the client was syntactically incorrect.</p><hr/><h3>Payara Server  5.2022.5 #badassfish</h3></body></html>
+May 15, 2023 10:26:46 AM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 6000
+May 15, 2023 10:26:46 AM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 6000
