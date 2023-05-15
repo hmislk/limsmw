@@ -61,6 +61,7 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
     }
 
     public boolean sendENQAndCheckACK() throws IOException {
+        System.out.println("sendENQAndCheckACK = " );
         if (serialPort == null) {
             throw new IOException("Not connected to the serial port");
         }
@@ -81,6 +82,7 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
     }
 
     public void startListening() {
+        System.out.println("startListening");
         listeningThread = new Thread(this);
         listeningThread.start();
     }
@@ -93,19 +95,23 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
 
     @Override
     public void run() {
+        System.out.println("run");
         try {
             // Send ENQ at the start
             if (!sendENQAndCheckACK()) {
                 throw new IOException("Failed to send ENQ or didn't receive ACK");
             }
-
+            System.out.println("1"
+                    + "");
             InputStream inputStream = getInputStream();
             OutputStream outputStream = getOutputStream();
             byte[] buffer = new byte[1024];
             int len;
 
             while ((len = inputStream.read(buffer)) > -1) {
+                System.out.println("2");
                 for (int i = 0; i < len; i++) {
+                    System.out.println("i = " + i);
                     if (buffer[i] == ENQ) {
                         // Respond to ENQ with ACK
                         outputStream.write(ACK);
@@ -113,7 +119,7 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
                         System.out.println("Received ENQ, sent ACK");
                     }
                 }
-
+                System.out.println("to do");
                 // Here you can implement your action based on the input data
                 // For this example, we just print the received bytes to the console
                 System.out.println(new String(buffer, 0, len));
