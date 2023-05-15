@@ -25,7 +25,8 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
         comPort.setNumDataBits(8);
         comPort.setNumStopBits(SerialPort.ONE_STOP_BIT);
         comPort.setParity(SerialPort.NO_PARITY);
-        
+        System.out.println("this = " + this);
+        System.out.println("portName = " + portName);
         if (!comPort.openPort()) {
             throw new RuntimeException("Error: Unable to open the port");
         }

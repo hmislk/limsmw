@@ -5928,3 +5928,51 @@ May 15, 2023 4:11:35 PM org.openhealth.limsmw.TCPServerCommHandler <init>
 INFO: analyzer.getPort() = 11000
 May 15, 2023 4:11:35 PM org.openhealth.limsmw.TCPServerCommHandler run
 INFO: TCP Server started on port 11000
+May 15, 2023 4:22:13 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 11000
+May 15, 2023 4:22:13 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 11000
+May 15, 2023 4:34:18 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 15, 2023 4:34:18 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230515163418||OUL^R22^OUL_R22|5dc0fd9b-9d40-4c37-aa65-766b583e31da|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-29^IHESPM|1|WASANA||SER|||||||P|||||||OBR||""||CRP^CRP^A400|||||||||||||||||||||||||ORC|OK||||CM||||20230515163418OBX|1|NM|CRP^CRP^A400||1.91011715|mg/L^mg/L^A400||NONE|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230515220418
+May 15, 2023 4:34:18 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = OUL^R22^OUL_R22
+May 15, 2023 4:34:18 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTUxNjM0MTh8fE9VTF5SMjJeT1VMX1IyMnw1ZGMwZmQ5Yi05ZDQwLTRjMzctYWE2NS03NjZiNTgzZTMxZGF8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI5XklIRQ1TUE18MXxXQVNBTkF8fFNFUnx8fHx8fHxQfHx8fHx8fA1PQlJ8fCIifHxDUlBeQ1JQXkE0MDB8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8DU9SQ3xPS3x8fHxDTXx8fHwyMDIzMDUxNTE2MzQxOA1PQlh8MXxOTXxDUlBeQ1JQXkE0MDB8fDEuOTEwMTE3MTV8bWcvTF5tZy9MXkE0MDB8fE5PTkV8fHxGfHx8fHxBRE1JTnx8QTQwMF5CaW9zeXN0ZW1zfjgzNDAwMjM1NV5CaW9zeXN0ZW1zfDIwMjMwNTE1MjIwNDE4DRwN
+May 15, 2023 4:34:19 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 200
+May 15, 2023 4:34:19 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response as it is = {"result":"TVNIfF5+XCZ8SG9zdHxIb3N0IHByb3ZpZGVyfEJBNDAwfEJpb3N5c3RlbXN8MjAyMzA1MTUxNjM0MTkuMjQrMDUzMHx8QUNLXlIyMl5BQ0t8NjE4MDF8UHwyLjUuMQ1NU0F8QUF8NWRjMGZkOWItOWQ0MC00YzM3LWFhNjUtNzY2YjU4M2UzMWRhDQ=="}
+May 15, 2023 4:34:19 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Encoded Message Received from LIMS = TVNIfF5+XCZ8SG9zdHxIb3N0IHByb3ZpZGVyfEJBNDAwfEJpb3N5c3RlbXN8MjAyMzA1MTUxNjM0MTkuMjQrMDUzMHx8QUNLXlIyMl5BQ0t8NjE4MDF8UHwyLjUuMQ1NU0F8QUF8NWRjMGZkOWItOWQ0MC00YzM3LWFhNjUtNzY2YjU4M2UzMWRhDQ==
+May 15, 2023 4:34:19 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Decoded Message Received from LIMS = MSH|^~\&|Host|Host provider|BA400|Biosystems|20230515163419.24+0530||ACK^R22^ACK|61801|P|2.5.1MSA|AA|5dc0fd9b-9d40-4c37-aa65-766b583e31da
+May 15, 2023 4:34:19 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS sent Message Type = ACK^R22^ACK
+May 15, 2023 4:35:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Process Analyzer Message
+May 15, 2023 4:35:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer = MSH|^~\&|BA400|Biosystems|Host|Host provider|20230515163539||OUL^R22^OUL_R22|a98d15ec-ead5-4e8f-9da2-654d8de24bc2|P|2.5.1|||ER|AL||UNICODE UTF-8|||LAB-29^IHESPM|1|THILINI||SER|||||||P|||||||OBR||""||CRP^CRP^A400|||||||||||||||||||||||||ORC|OK||||CM||||20230515163539OBX|1|NM|CRP^CRP^A400||152.049789|mg/L^mg/L^A400||030|||F|||||ADMIN||A400^Biosystems~834002355^Biosystems|20230515220539
+May 15, 2023 4:35:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Analyzer Message Type = OUL^R22^OUL_R22
+May 15, 2023 4:35:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Message Received from Analyzer Encoded = TVNIfF5+XCZ8QkE0MDB8Qmlvc3lzdGVtc3xIb3N0fEhvc3QgcHJvdmlkZXJ8MjAyMzA1MTUxNjM1Mzl8fE9VTF5SMjJeT1VMX1IyMnxhOThkMTVlYy1lYWQ1LTRlOGYtOWRhMi02NTRkOGRlMjRiYzJ8UHwyLjUuMXx8fEVSfEFMfHxVTklDT0RFIFVURi04fHx8TEFCLTI5XklIRQ1TUE18MXxUSElMSU5JfHxTRVJ8fHx8fHx8UHx8fHx8fHwNT0JSfHwiInx8Q1JQXkNSUF5BNDAwfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fA1PUkN8T0t8fHx8Q018fHx8MjAyMzA1MTUxNjM1MzkNT0JYfDF8Tk18Q1JQXkNSUF5BNDAwfHwxNTIuMDQ5Nzg5fG1nL0xebWcvTF5BNDAwfHwwMzB8fHxGfHx8fHxBRE1JTnx8QTQwMF5CaW9zeXN0ZW1zfjgzNDAwMjM1NV5CaW9zeXN0ZW1zfDIwMjMwNTE1MjIwNTM5DRwN
+May 15, 2023 4:35:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response Code = 200
+May 15, 2023 4:35:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS response as it is = {"result":"TVNIfF5+XCZ8SG9zdHxIb3N0IHByb3ZpZGVyfEJBNDAwfEJpb3N5c3RlbXN8MjAyMzA1MTUxNjM1NDAuMDg0KzA1MzB8fEFDS15SMjJeQUNLfDYxOTAxfFB8Mi41LjENTVNBfEFBfGE5OGQxNWVjLWVhZDUtNGU4Zi05ZGEyLTY1NGQ4ZGUyNGJjMg0="}
+May 15, 2023 4:35:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Encoded Message Received from LIMS = TVNIfF5+XCZ8SG9zdHxIb3N0IHByb3ZpZGVyfEJBNDAwfEJpb3N5c3RlbXN8MjAyMzA1MTUxNjM1NDAuMDg0KzA1MzB8fEFDS15SMjJeQUNLfDYxOTAxfFB8Mi41LjENTVNBfEFBfGE5OGQxNWVjLWVhZDUtNGU4Zi05ZGEyLTY1NGQ4ZGUyNGJjMg0=
+May 15, 2023 4:35:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: Decoded Message Received from LIMS = MSH|^~\&|Host|Host provider|BA400|Biosystems|20230515163540.084+0530||ACK^R22^ACK|61901|P|2.5.1MSA|AA|a98d15ec-ead5-4e8f-9da2-654d8de24bc2
+May 15, 2023 4:35:39 PM org.openhealth.limsmw.TCPServerCommHandler processAnalyzerMessage
+INFO: LIMS sent Message Type = ACK^R22^ACK
+May 15, 2023 4:36:23 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 11000
+May 15, 2023 4:36:23 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 11000
+May 15, 2023 4:37:27 PM org.openhealth.limsmw.TCPServerCommHandler <init>
+INFO: analyzer.getPort() = 11000
+May 15, 2023 4:37:27 PM org.openhealth.limsmw.TCPServerCommHandler run
+INFO: TCP Server started on port 11000
