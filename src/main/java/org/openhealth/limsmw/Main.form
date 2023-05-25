@@ -45,11 +45,17 @@
                               <EmptySpace min="-2" pref="321" max="-2" attributes="0"/>
                               <Component id="lblBillNo" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnSettings" min="-2" pref="99" max="-2" attributes="0"/>
-                                  <Component id="btnClear" min="-2" pref="99" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnTest" min="-2" pref="99" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="btnSettings" min="-2" pref="99" max="-2" attributes="0"/>
+                                      <Component id="btnClear" min="-2" pref="99" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
@@ -73,7 +79,9 @@
                       <Component id="btnClear" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnTest" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="lblBillNo" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="210" max="-2" attributes="0"/>
@@ -135,6 +143,11 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="text" type="java.lang.String" value="Analyzers"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTest">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Test"/>
       </Properties>
     </Component>
   </SubComponents>
