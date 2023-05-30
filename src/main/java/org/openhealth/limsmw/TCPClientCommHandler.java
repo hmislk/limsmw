@@ -49,4 +49,9 @@ public class TCPClientCommHandler  implements AnalyzerCommHandler {
             throw new IOException("Not connected to the server");
         }
     }
+
+    @Override
+    public String processAnalyzerMessage(String receivedMessage) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

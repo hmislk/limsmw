@@ -140,8 +140,6 @@ public class Main extends javax.swing.JFrame {
                     analyzerCommHandlers.put(analyzer, serialCommHandler);
                     serialCommHandler.connect();  // Establish the connection
                     txtLog.append("Serial connection established for analyzer: " + analyzer.getName() + "\n");
-                    // Start listening
-                    serialCommHandler.startListening();
                     txtLog.append("Started listening to analyzer: " + analyzer.getName() + "\n");
                 } catch (Exception e) {
                     txtLog.append("Failed to establish serial connection or start listening for analyzer: " + analyzer.getName() + "\n");

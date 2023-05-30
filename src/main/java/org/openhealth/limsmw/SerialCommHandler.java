@@ -1,18 +1,17 @@
 package org.openhealth.limsmw;
 
-import com.fazecast.jSerialComm.*;
+import com.fazecast.jSerialComm.SerialPort;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
 
     private String portName;
     private int baudRate;
     private SerialPort comPort;
-    private static final byte ENQ = 0x05;
-    private static final byte ACK = 0x06;
-    private Thread listeningThread;
+    private int frameNumber;
 
     public SerialCommHandler(String portName, int baudRate) {
         this.portName = portName;
@@ -25,8 +24,7 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
         comPort.setNumDataBits(8);
         comPort.setNumStopBits(SerialPort.ONE_STOP_BIT);
         comPort.setParity(SerialPort.NO_PARITY);
-        System.out.println("this = " + this);
-        System.out.println("portName = " + portName);
+
         if (!comPort.openPort()) {
             throw new RuntimeException("Error: Unable to open the port");
         }
@@ -41,88 +39,74 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
         }
     }
 
-    public InputStream getInputStream() {
-        if (comPort != null) {
-            return comPort.getInputStream();
-        } else {
-            throw new RuntimeException("Not connected to the serial port");
-        }
-    }
-
-    public OutputStream getOutputStream() {
-        if (comPort != null) {
-            return comPort.getOutputStream();
-        } else {
-            throw new RuntimeException("Not connected to the serial port");
-        }
-    }
-
-    public boolean sendENQAndCheckACK() throws IOException {
-        System.out.println("sendENQAndCheckACK = " );
-        if (comPort == null) {
-            throw new IOException("Not connected to the serial port");
-        }
-
-        OutputStream outputStream = getOutputStream();
-        outputStream.write(ENQ);
-        outputStream.flush();
-
-        InputStream inputStream = getInputStream();
-        byte[] buffer = new byte[1];
-        int readBytes = inputStream.read(buffer);
-
-        if (readBytes < 1) {
-            throw new IOException("No response from the device");
-        }
-
-        return buffer[0] == ACK;
-    }
-
     public void startListening() {
-        System.out.println("startListening");
-        listeningThread = new Thread(this);
+        Thread listeningThread = new Thread(this);
         listeningThread.start();
     }
 
     public void stopListening() {
-        if (listeningThread != null) {
-            listeningThread.interrupt();
-        }
+        // Implement the necessary logic to stop the listening thread, if required
     }
 
     @Override
     public void run() {
-        System.out.println("run");
         try {
-            // Send ENQ at the start
-            if (!sendENQAndCheckACK()) {
-                throw new IOException("Failed to send ENQ or didn't receive ACK");
-            }
-            System.out.println("1");
-            InputStream inputStream = getInputStream();
-            OutputStream outputStream = getOutputStream();
+            InputStream inputStream = comPort.getInputStream();
             byte[] buffer = new byte[1024];
             int len;
 
             while ((len = inputStream.read(buffer)) > -1) {
-                System.out.println("2");
-                for (int i = 0; i < len; i++) {
-                    System.out.println("i = " + i);
-                    if (buffer[i] == ENQ) {
-                        // Respond to ENQ with ACK
-                        outputStream.write(ACK);
-                        outputStream.flush();
-                        System.out.println("Received ENQ, sent ACK");
-                    }
-                }
-                System.out.println("to do");
-                // Here you can implement your action based on the input data
-                // For this example, we just print the received bytes to the console
-               
-                System.out.println(new String(buffer, 0, len));
+                String receivedMessage = new String(buffer, 0, len).trim();
+                System.out.println("Received message: " + receivedMessage);
+
+                // Send ACK
+                comPort.writeBytes(new byte[]{0x06}, 1);
+                System.out.println("Sent ACK.");
+
+                processReceivedData(receivedMessage);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void processReceivedData(String receivedData) {
+        String[] frames = splitIntoFrames(receivedData, 240);
+        frameNumber = 1;
+
+        for (String frame : frames) {
+            sendFrame(frame, frameNumber);
+            frameNumber++;
+        }
+
+        System.out.println("Received data: " + receivedData);
+    }
+
+    private String[] splitIntoFrames(String text, int maxLength) {
+        int textLength = text.length();
+        int numOfFrames = textLength / maxLength;
+        if (textLength % maxLength != 0) {
+            numOfFrames++;
+        }
+        String[] frames = new String[numOfFrames];
+        for (int i = 0; i < numOfFrames; i++) {
+            int startIndex = i * maxLength;
+            int endIndex = Math.min((i + 1) * maxLength, textLength);
+            frames[i] = text.substring(startIndex, endIndex);
+        }
+        return frames;
+    }
+
+    private void sendFrame(String frameText, int frameNumber) {
+        String frame = "F" + frameNumber + " " + frameText;
+        System.out.println("Sent frame: " + frame);
+    }
+
+    @Override
+    public String processAnalyzerMessage(String receivedMessage) {
+        // Implement your logic to process the received message
+        // Modify this method according to your requirements
+        // Return the processed message
+        return "Processed: " + receivedMessage;
     }
 }

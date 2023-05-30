@@ -147,7 +147,8 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
         }
     }
 
-    private String processAnalyzerMessage(String receivedMessage) {
+    @Override
+    public String processAnalyzerMessage(String receivedMessage) {
         LOGGER.info("Process Analyzer Message");
         try {
             LOGGER.info("Message Received from Analyzer = " + receivedMessage);
