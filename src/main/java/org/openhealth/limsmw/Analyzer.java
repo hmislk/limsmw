@@ -170,6 +170,7 @@ public class Analyzer {
     public enum CommunicationType {
         SERVER,
         CLIENT,
+        SERVER_CLIENT,
         NONE,
     }
 }
