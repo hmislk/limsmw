@@ -29,6 +29,7 @@ public class AnalyzerEditor extends JDialog {
     private JComboBox<Analyzer.InterfaceType> cbInterfaceType;
     private JComboBox<Analyzer.InterfaceProtocol> cbInterfaceProtocol;
     private JComboBox<Analyzer.CommunicationType> cbCommunicationType;
+    private JComboBox<Analyzer.Encoding> cbEncodingType;
     private JTextField tfBaudRate;
     private JTextField tfIpAddress;
 
@@ -70,8 +71,8 @@ public class AnalyzerEditor extends JDialog {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        System.out.println("analyzer = " + analyzer);
-        System.out.println("analyzer.getName() = " + analyzer.getName());
+        // System.out.println("analyzer = " + analyzer);
+        // System.out.println("analyzer.getName() = " + analyzer.getName());
 
         c.gridx = 0;
         c.gridy = 0;
@@ -127,27 +128,35 @@ public class AnalyzerEditor extends JDialog {
 
         c.gridx = 0;
         c.gridy = 7;
+        add(new JLabel("Encording Type:"), c);
+        cbEncodingType = new JComboBox<>(Analyzer.Encoding.values());
+        cbEncodingType.setSelectedItem(analyzer.getCommunicationType());
+        c.gridx = 1;
+        add(cbEncodingType, c);
+
+        c.gridx = 0;
+        c.gridy = 8;
         add(new JLabel("Baud Rate:"), c);
         tfBaudRate = new JTextField(String.valueOf(analyzer.getBaudRate()), 20);
         c.gridx = 1;
         add(tfBaudRate, c);
 
         c.gridx = 0;
-        c.gridy = 8;
+        c.gridy = 9;
         add(new JLabel("Port:"), c);
         tfPort = new JTextField(String.valueOf(analyzer.getPort()), 20);
         c.gridx = 1;
         add(tfPort, c);
 
         c.gridx = 0;
-        c.gridy = 9;
+        c.gridy = 10;
         add(new JLabel("IP Address:"), c);
         tfIpAddress = new JTextField(analyzer.getIpAddress(), 30);
         c.gridx = 1;
         add(tfIpAddress, c);
 
         c.gridx = 0;
-        c.gridy = 10;
+        c.gridy = 11;
         c.gridwidth = 2;
         c.anchor = GridBagConstraints.CENTER;
 
@@ -185,6 +194,8 @@ public class AnalyzerEditor extends JDialog {
         analyzer.setInterfaceType((Analyzer.InterfaceType) cbInterfaceType.getSelectedItem());
         analyzer.setInterfaceProtocol((Analyzer.InterfaceProtocol) cbInterfaceProtocol.getSelectedItem());
         analyzer.setCommunicationType((Analyzer.CommunicationType) cbCommunicationType.getSelectedItem());
+        analyzer.setEncodingType((Analyzer.Encoding) cbEncodingType.getSelectedItem());
+        
         analyzer.setBaudRate(Integer.parseInt(tfBaudRate.getText()));
         analyzer.setIpAddress(tfIpAddress.getText());
         if (isNewAnalyzer) {

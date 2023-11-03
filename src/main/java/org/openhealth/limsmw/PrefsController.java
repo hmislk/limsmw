@@ -19,10 +19,10 @@ public class PrefsController {
     private static Preference preference;
 
     public static void loadPrefs() {
-        System.out.println("loadPrefs");
+        // System.out.println("loadPrefs");
         // Get the user preferences node for this application
         Preferences prefs = Preferences.userNodeForPackage(PrefsController.class);
-        System.out.println("prefs = " + prefs);
+        // System.out.println("prefs = " + prefs);
         // Get the value of the preference
         
         prefJsonValue = prefs.get(PREF_JSON_NAME, null);
@@ -34,16 +34,16 @@ public class PrefsController {
             prefJsonValue = preferenceToJson(p);
         }
         
-        System.out.println("prefJsonValue = " + prefJsonValue);
+        // System.out.println("prefJsonValue = " + prefJsonValue);
         preference = jsonToPreference(prefJsonValue);
-        System.out.println("preference = " + preference);
+        // System.out.println("preference = " + preference);
     }
 
     public static void savePrefs() {
         // Get the user preferences node for this application
         Preferences prefs = Preferences.userNodeForPackage(PrefsController.class);
         prefJsonValue = preferenceToJson(preference);
-        System.out.println("prefJsonValue = " + prefJsonValue);
+        // System.out.println("prefJsonValue = " + prefJsonValue);
         prefs.put(PREF_JSON_NAME, prefJsonValue);
     }
 

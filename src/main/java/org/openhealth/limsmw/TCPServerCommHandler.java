@@ -20,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,8 +50,19 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
     }
 
     public static boolean isASTME139497HeaderMessage(String message) {
-        String headerPattern = "H\\\\\\^&\\|{3}XS\\^\\d{2}-\\d{2}\\^\\d{5}\\^{4}CH\\d{6}\\|{8}E1394-97";
-        return message.matches(headerPattern);
+        // System.out.println("isASTME139497HeaderMessage");
+        // System.out.println("message = " + message);
+        printAsciiValues(message);
+        String headerPattern = "H\\|\\\\\\^&\\|{3}XS\\^\\d{2}-\\d{2}\\^\\d{5}\\^{4}CH\\d{6}\\|{8}E1394-97\\r?\\n?";
+        boolean matchCorrectly = message.matches(headerPattern);
+        // System.out.println("matchCorrectly = " + matchCorrectly);
+        return matchCorrectly;
+    }
+
+    public static void printAsciiValues(String message) {
+        for (char c : message.toCharArray()) {
+            // System.out.println((int) c + " ");
+        }
     }
 
     @Override
@@ -97,10 +109,25 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                         receivedMessage = new String(buffer, 0, bytesRead);
                         char firstChar = receivedMessage.charAt(0);
                         int firstCharAsciiValue = (int) firstChar;
-                        
-                        if(isASTME139497HeaderMessage(receivedMessage)){
-                            responseMessage = "ACK";
-                            writeMessageToStream(outputStream, responseMessage);
+
+                        System.out.println("receivedMessage = " + receivedMessage);
+
+                        if (isASTME139497HeaderMessage(receivedMessage)) {
+                            System.out.println("sending ACK");
+                            sendAckMessage(outputStream);
+                            continue;
+                        }
+
+                        if (isASTME139497HeaderMessage(receivedMessage)) {
+                            System.out.println("Header message received, sending ACK");
+                            sendAckMessage(outputStream);
+                            // Now wait for the next message, which should be the results
+                            bytesRead = inputStream.read(buffer);
+                            if (bytesRead != -1) {
+                                String resultMessage = new String(buffer, 0, bytesRead);
+                                System.out.println("Result message received: " + resultMessage);
+                                // Process the result message here
+                            }
                         }
 
 //                        if (firstCharAsciiValue < 32) {
@@ -156,10 +183,28 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
             }
         }
     }
-    
+
+    private void sendAckMessage(OutputStream outputStream) throws IOException {
+        // ACK character in ASCII
+        final byte ackByte = 0x06; // ACK ASCII value is 6
+        // Carriage return in ASCII
+        final byte carriageReturn = 0x0D; // CR ASCII value is 13
+        // Line feed in ASCII
+        final byte lineFeed = 0x0A; // LF ASCII value is 10
+
+        // Create the ACK message byte array with CR and LF
+        byte[] ackMessage = new byte[]{ackByte, carriageReturn, lineFeed};
+
+        // Send the ACK message
+        outputStream.write(ackMessage);
+        outputStream.flush();
+    }
+
     private void writeMessageToStream(OutputStream outputStream, String message) throws IOException {
+        System.out.println("writeMessageToStream");
         Charset charset;
         if (analyzer != null) {
+
             if (analyzer.getEncodingType() == null) {
                 charset = StandardCharsets.UTF_8;
             } else {
@@ -184,11 +229,15 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
             charset = StandardCharsets.UTF_8;
         }
 
+        System.out.println("charset = " + charset);
+
         byte[] messageBytes = message.getBytes(charset);
+
+        System.out.println("messageBytes = " + messageBytes);
+        System.out.println("messageBytes = " + Arrays.toString(messageBytes));
         outputStream.write(messageBytes);
         outputStream.flush();
     }
-    
 
     private String processAnalyzerMessage(String receivedMessage) {
         LOGGER.info("Process Analyzer Message");
@@ -282,8 +331,6 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
 
         return null;
     }
-
-    
 
     public void stop() {
         if (serverSocket != null) {

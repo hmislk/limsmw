@@ -172,17 +172,17 @@ public class Login extends javax.swing.JFrame {
         connection.setRequestProperty("Authorization", getBasicAuthHeaderValue(username, password));
 
         int responseCode = connection.getResponseCode();
-        System.out.println("Response Code: " + responseCode);
+        // System.out.println("Response Code: " + responseCode);
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
             try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
+                    // System.out.println(line);
                 }
             }
         } else {
-            System.out.println("Request failed. Response code: " + responseCode);
+            // System.out.println("Request failed. Response code: " + responseCode);
         }
         connection.disconnect();
     }
@@ -209,7 +209,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     public OperationOutcome createOperationOutcomeForFailure(String details) {
-        System.out.println("createOperationOutcomeForFailure");
+        // System.out.println("createOperationOutcomeForFailure");
         // Create a new CodeableConcept to hold the error details
         CodeableConcept codeableConcept = new CodeableConcept();
         codeableConcept.setText(details);
@@ -286,14 +286,14 @@ public class Login extends javax.swing.JFrame {
             connection.getOutputStream().write(requestBody.getBytes());
 
             int responseCode = connection.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
+            // System.out.println("Response Code: " + responseCode);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                System.out.println("HTTP OK");
+                // System.out.println("HTTP OK");
                 try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        System.out.println(line);
+                        // System.out.println(line);
                     }
                 }
                 executeSuccessfulLoginActions();
@@ -310,12 +310,12 @@ public class Login extends javax.swing.JFrame {
                     responseBody = sb.toString();
                 }
                 IParser parser = FhirContext.forR4().newJsonParser();
-                System.out.println("responseBody = " + responseBody);
+                // System.out.println("responseBody = " + responseBody);
                 OperationOutcome outcome = parser.parseResource(OperationOutcome.class, responseBody);
                 if (outcome != null) {
-                    System.out.println("Login failed: " + outcome.getIssueFirstRep().getDetails().getText());
+                    // System.out.println("Login failed: " + outcome.getIssueFirstRep().getDetails().getText());
                 } else {
-                    System.out.println("Login failed. Response code: " + responseCode);
+                    // System.out.println("Login failed. Response code: " + responseCode);
                 }
             }
         } catch (MalformedURLException ex) {

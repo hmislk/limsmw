@@ -133,7 +133,7 @@ public class Main extends javax.swing.JFrame {
     private void establishConnections() {
         txtLog.setText("Interfacing is Starting");
         for (Analyzer analyzer : analyzers) {
-            System.out.println("analyzer = " + analyzer.getName());
+            // System.out.println("analyzer = " + analyzer.getName());
             if (analyzer.getInterfaceType() == Analyzer.InterfaceType.SERIAL) {
                 try {
                     SerialCommHandler serialCommHandler = new SerialCommHandler(analyzer.getPortName(), analyzer.getBaudRate());
@@ -203,7 +203,7 @@ public class Main extends javax.swing.JFrame {
         if (!evt.getValueIsAdjusting()) {
             Analyzer selectedAnalyzer = lstAnalyzersCustom.getSelectedValue();
             if (selectedAnalyzer != null) {
-                System.out.println("Selected Analyzer: " + selectedAnalyzer.getName());
+                // System.out.println("Selected Analyzer: " + selectedAnalyzer.getName());
             }
         }
     }

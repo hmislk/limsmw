@@ -17,13 +17,13 @@ public class TCPClientCommHandler  implements AnalyzerCommHandler {
 
     public void connect() throws IOException {
         socket = new Socket(serverAddress, serverPort);
-        System.out.println("Connected to server " + serverAddress + ":" + serverPort);
+        // System.out.println("Connected to server " + serverAddress + ":" + serverPort);
     }
 
     public void disconnect() throws IOException {
         if (socket != null) {
             socket.close();
-            System.out.println("Disconnected from server");
+            // System.out.println("Disconnected from server");
         }
     }
 

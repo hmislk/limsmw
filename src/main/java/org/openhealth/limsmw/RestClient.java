@@ -62,7 +62,7 @@ public class RestClient {
             connection.getOutputStream().write(requestBody.getBytes());
 
             int responseCode = connection.getResponseCode();
-            System.out.println("Response Code: " + responseCode);
+            // System.out.println("Response Code: " + responseCode);
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -87,9 +87,9 @@ public class RestClient {
                 IParser parser = FhirContext.forR4().newJsonParser();
                 OperationOutcome outcome = parser.parseResource(OperationOutcome.class, responseBody);
                 if (outcome != null) {
-                    System.out.println("Operation failed: " + outcome.getIssueFirstRep().getDetails().getText());
+                    // System.out.println("Operation failed: " + outcome.getIssueFirstRep().getDetails().getText());
                 } else {
-                    System.out.println("Operation failed. Response code: " + responseCode);
+                    // System.out.println("Operation failed. Response code: " + responseCode);
                 }
                 return null;
             }

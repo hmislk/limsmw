@@ -82,7 +82,7 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
                     return true;
                 }
             } catch (SerialPortTimeoutException e) {
-                System.out.println("Timeout waiting for ACK, retrying...");
+                // System.out.println("Timeout waiting for ACK, retrying...");
                 retries++;
             } catch (IOException e) {
                 throw new RuntimeException("IO Exception during sendENQAndCheckACK", e);
@@ -93,7 +93,7 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
     }
 
     public void startListening() {
-        System.out.println("startListening");
+        // System.out.println("startListening");
         listeningThread = new Thread(this);
         listeningThread.start();
     }
@@ -106,34 +106,34 @@ public class SerialCommHandler implements AnalyzerCommHandler, Runnable {
 
     @Override
     public void run() {
-        System.out.println("run");
+        // System.out.println("run");
         try {
             // Send ENQ at the start
             if (!sendENQAndCheckACK()) {
                 throw new IOException("Failed to send ENQ or didn't receive ACK");
             }
-            System.out.println("1");
+            // System.out.println("1");
             InputStream inputStream = getInputStream();
             OutputStream outputStream = getOutputStream();
             byte[] buffer = new byte[1024];
             int len;
 
             while ((len = inputStream.read(buffer)) > -1) {
-                System.out.println("2");
+                // System.out.println("2");
                 for (int i = 0; i < len; i++) {
-                    System.out.println("i = " + i);
+                    // System.out.println("i = " + i);
                     if (buffer[i] == ENQ) {
                         // Respond to ENQ with ACK
                         outputStream.write(ACK);
                         outputStream.flush();
-                        System.out.println("Received ENQ, sent ACK");
+                        // System.out.println("Received ENQ, sent ACK");
                     }
                 }
-                System.out.println("to do");
+                // System.out.println("to do");
                 // Here you can implement your action based on the input data
                 // For this example, we just print the received bytes to the console
 
-                System.out.println(new String(buffer, 0, len));
+                // System.out.println(new String(buffer, 0, len));
             }
         } catch (IOException e) {
             e.printStackTrace();

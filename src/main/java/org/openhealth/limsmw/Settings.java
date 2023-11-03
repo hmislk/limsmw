@@ -163,7 +163,7 @@ public class Settings extends javax.swing.JFrame {
         if (!evt.getValueIsAdjusting()) {
             Analyzer selectedAnalyzer = lstAnalyzersCustom.getSelectedValue();
             if (selectedAnalyzer != null) {
-                System.out.println("Selected Analyzer: " + selectedAnalyzer.getName());
+                // System.out.println("Selected Analyzer: " + selectedAnalyzer.getName());
             }
         }
     }
