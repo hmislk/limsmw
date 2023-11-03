@@ -48,6 +48,11 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
         LOGGER.info("analyzer.getPort() = " + analyzer.getPort());
     }
 
+    public static boolean isASTME139497HeaderMessage(String message) {
+        String headerPattern = "H\\\\\\^&\\|{3}XS\\^\\d{2}-\\d{2}\\^\\d{5}\\^{4}CH\\d{6}\\|{8}E1394-97";
+        return message.matches(headerPattern);
+    }
+
     @Override
     public void run() {
 //        LOGGER.info("going to run " + analyzer.getName() + " on port " + analyzer.getPort() + ".");
@@ -92,6 +97,11 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                         receivedMessage = new String(buffer, 0, bytesRead);
                         char firstChar = receivedMessage.charAt(0);
                         int firstCharAsciiValue = (int) firstChar;
+                        
+                        if(isASTME139497HeaderMessage(receivedMessage)){
+                            responseMessage = "ACK";
+                            writeMessageToStream(outputStream, responseMessage);
+                        }
 
 //                        if (firstCharAsciiValue < 32) {
 //                            String[] controlCharacters = {
@@ -146,6 +156,39 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
             }
         }
     }
+    
+    private void writeMessageToStream(OutputStream outputStream, String message) throws IOException {
+        Charset charset;
+        if (analyzer != null) {
+            if (analyzer.getEncodingType() == null) {
+                charset = StandardCharsets.UTF_8;
+            } else {
+                switch (analyzer.getEncodingType()) {
+                    case ASCII:
+                        charset = StandardCharsets.US_ASCII;
+                        break;
+                    case ISO_8859_1:
+                        charset = StandardCharsets.ISO_8859_1;
+                        break;
+                    case UTF_8:
+                        charset = StandardCharsets.UTF_8;
+                        break;
+                    case UTF_16:
+                        charset = StandardCharsets.UTF_16;
+                        break;
+                    default:
+                        charset = StandardCharsets.UTF_8; // default to UTF-8 if not specified
+                }
+            }
+        } else {
+            charset = StandardCharsets.UTF_8;
+        }
+
+        byte[] messageBytes = message.getBytes(charset);
+        outputStream.write(messageBytes);
+        outputStream.flush();
+    }
+    
 
     private String processAnalyzerMessage(String receivedMessage) {
         LOGGER.info("Process Analyzer Message");
@@ -181,7 +224,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                 int responseCode = connection.getResponseCode();
                 LOGGER.info("LIMS response Code = " + responseCode);
                 if (responseCode == HttpURLConnection.HTTP_OK) {
-                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
                         StringBuilder responseBuilder = new StringBuilder();
                         String line;
                         while ((line = reader.readLine()) != null) {
@@ -195,13 +238,13 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
                         String decodedResultMessage = new String(decodedResultMessageBytes, StandardCharsets.UTF_8);
                         msgType = findMessageType(decodedResultMessage);
                         LOGGER.info("Encoded Message Received from LIMS = " + base64EncodedResultMessage);
-                        
+
                         LOGGER.info("Decoded Message Received from LIMS = " + decodedResultMessage);
                         LOGGER.info("LIMS sent Message Type = " + msgType);
                         return decodedResultMessage;
                     }
                 } else {
-                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
+                    try ( BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()))) {
                         StringBuilder responseBuilder = new StringBuilder();
                         String line;
                         while ((line = reader.readLine()) != null) {
@@ -240,37 +283,7 @@ public class TCPServerCommHandler implements Runnable, AnalyzerCommHandler {
         return null;
     }
 
-    private void writeMessageToStream(OutputStream outputStream, String message) throws IOException {
-        Charset charset;
-        if (analyzer != null) {
-            if (analyzer.getEncodingType() == null) {
-                charset = StandardCharsets.UTF_8;
-            } else {
-                switch (analyzer.getEncodingType()) {
-                    case ASCII:
-                        charset = StandardCharsets.US_ASCII;
-                        break;
-                    case ISO_8859_1:
-                        charset = StandardCharsets.ISO_8859_1;
-                        break;
-                    case UTF_8:
-                        charset = StandardCharsets.UTF_8;
-                        break;
-                    case UTF_16:
-                        charset = StandardCharsets.UTF_16;
-                        break;
-                    default:
-                        charset = StandardCharsets.UTF_8; // default to UTF-8 if not specified
-                }
-            }
-        } else {
-            charset = StandardCharsets.UTF_8;
-        }
-
-        byte[] messageBytes = message.getBytes(charset);
-        outputStream.write(messageBytes);
-        outputStream.flush();
-    }
+    
 
     public void stop() {
         if (serverSocket != null) {
