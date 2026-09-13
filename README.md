@@ -32,3 +32,7 @@ Dr. M.H.B. Ariyaratne, Mr. Gayan Malshan, Mr. Isuru Pathum
 
 ### Quantity Control Feedback
 Dr. A.N.E.M. Gunasekara, Mr. Charuka from Ruhunu Hospital
+
+## Licence
+
+This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE).
